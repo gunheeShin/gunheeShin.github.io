@@ -43,5 +43,20 @@
    3. differential manifold는 minimal parameterization된 tangent space가 항상 존재하고  minimal parameterization은 본질적으로 perturbation을 표현한다.
 
 3. $\cal{M}$이 Lie group(e.g. $\,\mathbb{R}^n$, SO(3), SE(3))인 경우
-   1. 
-         
+   1. Lie group의 tangent space(minimal parameterization)에서는 다음 두가지가 존재
+      1. m : Lie algebra
+      2. exp : (m -> $\cal{M}$) : exponential map
+   2. Let,
+      1.  f:( $\mathbb{R}^n$ -> m) : minimal parameterization space에서 Lie algebra로 mapping 함수
+      2.  Exp = exp $\circ$ f with inverse Log
+      3.  x $\boxplus$ u = x $\boxplus$ f(u) = Exp(u)
+      4.  y $\boxminus$ x = Log($x^{-1}$ y)
+4.  $\cal{M}$이 Lie group가 아닌 경우 (ex, $\mathbb{S}^2$)
+    1. $\cal{M}$이 Lie group가 아닌 경우, manifold와 minimal parameterization space간에 homeomorphism에 대한 general한 기준이 없다.
+    2. $\mathbb{S}^2 : \{x \in \mathbb{R}^3 \mid \|x\| = r, r \gt 1\}$의 경우
+       1. 어떤 점 x에 대한 minimal parameterization space(tangent space)는 x에서의 접평면이다.
+       2. 점 x에 대한 perturbation u는 접평면 위에서 x를 중심으로 회전시킨 벡터이다.
+       3. 접평면 위에서의 rotation vector는 두개의 basis vector로 minimally parameterized된다. ($u \in \mathbf{R}^2$)
+       4. $x \boxplus u$ = $R(B(x) \cdot u) \cdot x$ ;$\,$ $B(x) = [b_1(x), b_2(x)] \in \mathbf{R}^{3 \times 2}$
+          1. R(w) = $Exp(w) \in SO(3)$는 W벡터에 대한 axis-angle로 회전하는 rotation matrix이다.
+       5. $b_1(x)$, $b_2(x)$는 unique하지 않고, 둘은 서로 orhogonal해야하고 x에 대해 perpendicular해야한다.
