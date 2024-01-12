@@ -76,7 +76,6 @@
             
             kf_state.predict(dt, Q_, in);
        ```
-        <!-- - angular velocity와 linear acceleration의 평균을 구한다. -->
         - ```angvel_avr```와 ```acc_avr```의 평균을 구한다.
         - 마지막 줄처럼 acc_avr를 처리해 주는 이유는 방향을 유지한 채로 크기를 중력가속도로 맞춰주기 위함이다.
         - ```mean_acc_```는 initialization 과정에서 IMU acceleration의 평균을 구해놓은 값이다.
@@ -95,6 +94,42 @@
 
             IMUpose_.emplace_back(common::set_pose6d(offs_t, acc_s_last_, angvel_last_, imu_state.vel, imu_state.pos,
                                                     imu_state.rot.toRotationMatrix()));
+        }
         ```
-        - angular velocity와 linear acceleration의 bias를 빼준다.
-        - linear acceleration은 gravity acceleration의 영향을 제거해주기 위해 world frame으로 변환해주고 gravity acceleration을 더해준다.
+        - ```acc_avr```와 ```angvel_avr```에서 bias를 빼준다.
+        - ```acc_avr```은 중력의 영향을 제거해주기 위해 world frame으로 변환해주고 ```imu_state.grav```를 더해준다.
+
+
+5. Back Propagation
+    1. Forward propagation에서 구한 pose 기준으로 for문 실행
+        ```cpp
+        for (auto it_kp = IMUpose_.end() - 1; it_kp != IMUpose_.begin(); it_kp--) {
+            auto head = it_kp - 1;
+            auto tail = it_kp;
+
+            R_imu = common::MatFromArray(head->rot);
+            vel_imu = common::VecFromArray(head->vel);
+            pos_imu = common::VecFromArray(head->pos);
+
+            acc_imu = common::VecFromArray(tail->acc);
+            angvel_avr = common::VecFromArray(tail->gyr);
+        ```
+        - head, tail pose 사이 state를 코드와 같이 불러옴
+        - 어떤 point를 compensation할 때(motion compenstation), 해당 point의 stamp에서의 pose를 구해야 한다. 
+        - 이를 위해 head에서의 pose를 기준으로 tail의 input값을 이용하여 pose를 predict한다.
+        ```cpp
+            for (; it_pcl->curvature / double(1000) > head->offset_time; it_pcl--) {
+
+                dt = it_pcl->curvature / double(1000) - head->offset_time;
+                common::V3D P_i(it_pcl->x, it_pcl->y, it_pcl->z);
+
+                common::M3D R_i(R_imu * Exp(angvel_avr, dt));
+
+                common::V3D p_compensate =
+                imu_state.offset_R_L_I.conjugate() *
+                (imu_state.rot.conjugate() * (R_i * (imu_state.offset_R_L_I * P_i + imu_state.offset_T_L_I) + T_ei) -
+                 imu_state.offset_T_L_I);  // not accurate!
+
+
+        ``` 
+       
