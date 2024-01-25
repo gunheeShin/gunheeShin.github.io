@@ -198,7 +198,8 @@ $$
         \delta \ ^{W}P = \ ^{W}_{L}\hat{R} \ \left \lfloor - \delta \ ^{L}P \right \rfloor_x \delta \ ^{W}_{L}\theta + \delta \ ^{W}_{L}t + \ ^{W}_{L}\hat{R} \ \delta \ ^{L}P
     $$
 
-    Covariance of $\delta \ ^{W}P$ (=$^{W}P$) can be calculated by
+    <!-- Covariance of $\delta \ ^{W}P$ (=$^{W}P$) can be calculated by -->
+    Covaariance of $\delta \ ^{W}P$ (=$\Sigma_{^{W}P}$) can be calculated by
     $$
         \Sigma _{^{W}P} = \ ^{W}_{L}\hat{R} \ \Sigma_{^{L}P} \ \ ^{W}_{L}\hat{R}^{T} + \ ^{W}_{L}\hat{R} \left \lfloor - \delta \ ^{L}P \right \rfloor_x \Sigma_{R} \left \lfloor - \delta \ ^{L}P \right \rfloor_x^{T} \ ^{W}_{L}\hat{R}^{T} + \Sigma_{t}
 
