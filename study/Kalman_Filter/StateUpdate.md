@@ -110,29 +110,29 @@
 1. w/o considering point uncertainty caused by state and LiDAR
     1. Equation
         $$
-            0 = h^{\kappa}_j(x_k, n) = u^{\kappa}_j(\ ^{W}_{I_K}T^\kappa \cdot ( \ ^{I_k}p_j + n) - \ ^Wq^{\kappa}_j)
+            0 = h^{\kappa}_j(x_k, n) = {u^{\kappa}_j}^T(\ ^{W}_{I_K}T^\kappa \cdot ( \ ^{I_k}p_j + n) - \ ^Wq^{\kappa}_j)
         $$
         $$
-            0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = u^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k) \cdot ( \ ^{I_k}\hat{p}_j + \ ^{I_k}n_j) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) 
+            0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = {u^{\kappa}_j}^T(\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k) \cdot ( \ ^{I_k}\hat{p}_j + n) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) 
         $$
         1. 우리는 실제 true correspondence를 모르고 매 iteration마다 근접한 plane을 true correspondence로 가정하기 때문에 measurement model 및 true state에 대해서 $\kappa$를 표기했다.
     2. First order approximation
         $$
-            0 = h^{\kappa}_j(x_k, n) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
+            0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + \frac{\partial h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,0)}{\partial \widetilde{x}^\kappa _k} \widetilde{x}^\kappa _k + \frac{\partial h^{\kappa}_j(\hat{x}_k^{\kappa},n)}{\partial n} n
         $$
-
-    3. Residual(error of the measurement)
+        1. For sake of simplicity,
         $$
-            r^{\kappa}_j = h^{\kappa}_j(x_k, n) - h^{\kappa}_j(\hat{x}_k^{\kappa},0) \approx H^\kappa _j \widetilde{x}^\kappa _k + u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
+            0 = h^{\kappa}_j(x_k, n) \approx z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k + v^{\kappa}_j
         $$
-        1. For sake of simplicity, 
         $$
-            r^{\kappa}_j = H^\kappa _j \widetilde{x}^\kappa _k + D^\kappa _j n, \;\; D^\kappa _j = u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa
+            z^{\kappa}_j = h^{\kappa}_j(\hat{x}_k^{\kappa},0)
+            \;,\;
+            v^{\kappa}_j = u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
         $$
-    4. Jacobian
+    3. Jacobian
         1. $H^\kappa _j$ : Jacobian matrix of $h_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j)$ w.r.t $\widetilde{x}^\kappa _k$
         $$
-            h_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = u^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa \cdot Exp(\delta \theta^\kappa _k)  \ ^{I_k}p_j + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) + D^\kappa _j n
+            h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = {u^{\kappa}_j}^T(\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k) \cdot ( \ ^{I_k}\hat{p}_j + n) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) 
         $$
         2. $\widetilde{x}^\kappa _k$ is composed of 
             $$
@@ -143,33 +143,34 @@
         3. $H^\kappa _j$ and $R^\kappa _j$ is then,
             $$
                 H^\kappa _j = \begin{bmatrix}
-                    {-u^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor \ ^{I_k}p_j \right \rfloor)}^T & {u^{\kappa}_j}^T & 0 & 0 & 0 & 0
+                    ({{u^{\kappa}_j}^T(\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor \ ^{I_k}p_j \right \rfloor)})^T & ({u^{\kappa}_j}^T)^T & 0 & 0 & 0 & 0
                 \end{bmatrix}
                 \;\;
                 H^\kappa _j \in \mathbb{R}^{1 \times 15}
             $$
             $$
-                R^\kappa _j = D^\kappa _j \Sigma_{^{W}n_j} {D^\kappa _j}^T
+                v^{\kappa}_j = {u^{\kappa}_j}^T \cdot ^{W}_{I_K}R^\kappa n
+            $$
+            $$
+                v^{\kappa}_j \sim \mathcal{N}(0, R^\kappa _j)
+                \;\;
+                R^\kappa _j = ({u^{\kappa}_j}^T \cdot ^{W}_{I_K}R^\kappa) \Sigma_{^{W}n_j} ({u^{\kappa}_j}^T \cdot ^{W}_{I_K}R^\kappa)^T
                 \;\;
                 R^\kappa _j \in \mathbb{R}^{1 \times 1}
             $$
-    5. Final Measurement Model
+    4. Final Measurement Model
         1. We want to express measurement model w.r.t $\widetilde{x}$
         2. For $\kappa$th iteration, 
             1. Measurement model is always zero. which is,
                 $$
-                    0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + D^\kappa _j n
+                    0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) =z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k + v^{\kappa}_j
                 $$
-            2. Since $h^{\kappa}_j(\hat{x}_k^{\kappa},0)$ is equal to residual $-r^{\kappa}_j$, final measurement model is,
+            2. Measurement model can be expressed as Normal Distribution
                 $$
-                    h^{\kappa}_j(x_k, n) = -r^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k + D^\kappa _j n
-                $$
-            3. Measurement model can be expressed as Normal Distribution
-                $$
-                    h^{\kappa}_j(x_k, n) \sim \mathcal{N}(-r^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k, R^{\kappa}_j)
+                    h^{\kappa}_j(x_k, n) \sim \mathcal{N}(z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k, R^\kappa _j)
                 $$
 
-    6. $H$ and $R$ matix
+    5. $H$ and $R$ matix
         1. $H$ matrix
             $$
                 H^{\kappa} = \begin{bmatrix}
@@ -234,27 +235,36 @@
     3. Measurement Model
         1. Equation
             $$
-                0 = h^{\kappa}_j(x_k, n_j) = u^{\kappa}_j(\ ^{W}_{I_K}T^\kappa \cdot ( \ ^{I_k}p_j + ^{I_k}n_j) - q^{\kappa}_j) = u^{\kappa}_j(\ ^{W}p^\kappa _j - q^{\kappa}_j)
+                0 = h^{\kappa}_j(x_k, \ ^{I_k}n_j, \delta u^{\kappa}_j, \delta q^{\kappa}_j) = {u^{\kappa}_j}^T(\ ^{W}_{I_K}T^\kappa  \ ^{I_k}p_j - q^{\kappa}_j) = {u^{\kappa}_j}^T(\ ^{W}p^\kappa _j - q^{\kappa}_j)
+
             $$
+
             $$
-                0 = h^{\kappa}_j(x_k, n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j) = (\hat{u}^{\kappa}_j \boxplus \delta u^{\kappa}_j)[  (\ ^{W}\hat{p}^{\kappa} + \ ^{W}n^\kappa_j) -  (\hat{q}^{\kappa}_j + \delta q_j^{\kappa})]
-            $$
+                0 = h^{\kappa}_j(x_k, \ ^{I_k}n_j, \delta u^{\kappa}_j, \delta q^{\kappa}_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,\ ^{I_k}n_j, \delta u^{\kappa}_j, \delta q^{\kappa}_j) = (\hat{u}^{\kappa}_j \boxplus \delta u^{\kappa}_j)^T[\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k)( \ ^{I_k}\hat{p}_j + \ ^{I_k}n_j) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - (\ ^W\hat{q}^{\kappa}_j + \delta q_j^{\kappa})]        
+            $$        
         2. First order approximation
             $$
-                0 = h^{\kappa}_j(x_k, n_j) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{W}n_j^\kappa} \ ^{W}n_j^\kappa
+                0 = h^{\kappa}_j(x_k, \ ^{I_k}n_j, \delta u^{\kappa}_j, \delta q^{\kappa}_j) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{I_k}n_j} \ ^{I_k}n_j
             $$
-            $$ 
-                J_{u^{\kappa}_j} = (\ ^{W}\hat{p}^{\kappa} - \hat{q}^{\kappa}_j) \;,\; J_{q^{\kappa}_j} = -\hat{u}^{\kappa}_j \;,\; J_{\ ^{W}n_j^\kappa} = \hat{u}^{\kappa}_j
+
+            1. For sake of simplicity,
             $$
-                
-        3. Residual(error of the measurement)
+                0 = h^{\kappa}_j(x_k, \ ^{I_k}n_j, \delta u^{\kappa}_j, \delta q^{\kappa}_j) \approx z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k +v^{\kappa}_j
             $$
-                r^{\kappa}_j = h^{\kappa}_j(x_k, n_j) - h^{\kappa}_j(\hat{x}_k^{\kappa},0) \approx H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{W}n_j^\kappa} \ ^{W}n_j^\kappa
-            $$
-            $$
-                J_{u^{\kappa}_j} = 
-            $$
-            1. For sake of simplicity, 
-            $$
-                r^{\kappa}_j = H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{W}n_j^\kappa} \ ^{W}n_j^\kappa
-            $$
+        3. Jacobian
+            1. $H^\kappa _j$ : Jacobian matrix of $h_j^{\kappa}(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,0,0,0)$ w.r.t $\widetilde{x}^\kappa _k$
+                $$ 
+                    h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,0,0,0) = (\hat{u}^{\kappa}_j)^T[\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k)( \ ^{I_k}\hat{p}_j) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^W\hat{q}^{\kappa}_j]
+                $$
+                $$
+                    H^\kappa _j = \begin{bmatrix}
+                        ((\hat{u}^{\kappa}_j)^T(\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor \ ^{I_k}\hat{p}_j \right \rfloor))^T & (\hat{u}^{\kappa}_j)^T & 0 & 0 & 0 & 0
+                    \end{bmatrix}
+                    \;\;
+                    H^\kappa _j \in \mathbb{R}^{1 \times 15}
+                $$
+
+            2. $J_{u^{\kappa}_j}, J_{q^{\kappa}_j}, J_{\ ^{I_k}n_j}$ are then,
+                $$
+                    J_{u^{\kappa}_j} = (\ ^{W}\hat{p}^{\kappa} - \hat{q}^{\kappa}_j) \;,\; J_{q^{\kappa}_j} = -\hat{u}^{\kappa}_j \;,\; J_{\ ^{I_k}n_j} = \hat{u}^{\kappa}_j
+                $$
