@@ -110,29 +110,29 @@
 1. w/o considering point uncertainty caused by state and LiDAR
     1. Equation
         $$
-            0 = h^{\kappa}_j(x_k, n) = G^{\kappa}_j(\ ^{W}_{I_K}T^\kappa \cdot ( \ ^{I_k}p_j + n) - \ ^Wq^{\kappa}_j)
+            0 = h^{\kappa}_j(x_k, n) = u^{\kappa}_j(\ ^{W}_{I_K}T^\kappa \cdot ( \ ^{I_k}p_j + n) - \ ^Wq^{\kappa}_j)
         $$
         $$
-            0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = G^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k) \cdot ( \ ^{I_k}\hat{p}_j + \ ^{I_k}n_j) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) 
+            0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = u^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa Exp(\delta \theta^\kappa _k) \cdot ( \ ^{I_k}\hat{p}_j + \ ^{I_k}n_j) + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) 
         $$
         1. 우리는 실제 true correspondence를 모르고 매 iteration마다 근접한 plane을 true correspondence로 가정하기 때문에 measurement model 및 true state에 대해서 $\kappa$를 표기했다.
     2. First order approximation
         $$
-            0 = h^{\kappa}_j(x_k, n) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + G^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
+            0 = h^{\kappa}_j(x_k, n) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
         $$
 
     3. Residual(error of the measurement)
         $$
-            r^{\kappa}_j = h^{\kappa}_j(x_k, n) - h^{\kappa}_j(\hat{x}_k^{\kappa},0) \approx H^\kappa _j \widetilde{x}^\kappa _k + G^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
+            r^{\kappa}_j = h^{\kappa}_j(x_k, n) - h^{\kappa}_j(\hat{x}_k^{\kappa},0) \approx H^\kappa _j \widetilde{x}^\kappa _k + u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa n
         $$
         1. For sake of simplicity, 
         $$
-            r^{\kappa}_j = H^\kappa _j \widetilde{x}^\kappa _k + D^\kappa _j n, \;\; D^\kappa _j = G^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa
+            r^{\kappa}_j = H^\kappa _j \widetilde{x}^\kappa _k + D^\kappa _j n, \;\; D^\kappa _j = u^{\kappa}_j \cdot ^{W}_{I_K}R^\kappa
         $$
     4. Jacobian
         1. $H^\kappa _j$ : Jacobian matrix of $h_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j)$ w.r.t $\widetilde{x}^\kappa _k$
         $$
-            h_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = G^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa \cdot Exp(\delta \theta^\kappa _k)  \ ^{I_k}p_j + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) + D^\kappa _j n
+            h_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) = u^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa \cdot Exp(\delta \theta^\kappa _k)  \ ^{I_k}p_j + \ ^{W}_{I_K}\hat{t}^\kappa + \delta t^\kappa _k - \ ^Wq^{\kappa}_j) + D^\kappa _j n
         $$
         2. $\widetilde{x}^\kappa _k$ is composed of 
             $$
@@ -143,7 +143,7 @@
         3. $H^\kappa _j$ and $R^\kappa _j$ is then,
             $$
                 H^\kappa _j = \begin{bmatrix}
-                    {-G^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor \ ^{I_k}p_j \right \rfloor)}^T & {G^{\kappa}_j}^T & 0 & 0 & 0 & 0
+                    {-u^{\kappa}_j(\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor \ ^{I_k}p_j \right \rfloor)}^T & {u^{\kappa}_j}^T & 0 & 0 & 0 & 0
                 \end{bmatrix}
                 \;\;
                 H^\kappa _j \in \mathbb{R}^{1 \times 15}
@@ -196,4 +196,65 @@
         $$
             \Sigma_{^{W}n^\kappa _j} = \ ^{W}_{I_K}\hat{R}^\kappa \Sigma_{^{I_k}n_j} \ ^{W}_{I_K}\hat{R}^{\kappa T} + (\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor -\ ^{I_k}\hat{p}_j \right \rfloor) \Sigma_{\delta \ ^{W}_{I_K} \theta ^{\kappa}} (\ ^{W}_{I_K}\hat{R}^\kappa \left \lfloor- \ ^{I_k}\hat{p}_j \right \rfloor)^T + \Sigma_{\delta \ ^{W}_{I_K} t^\kappa }
         $$
-            
+
+    2. Plane Uncertainty Modeling
+        1. Plane feature consists of a group of LiDAR points $\; \ ^{W}p_i (i=1,2,\cdots,N)$, each has an uncertainty $\Sigma_{^{W}n_i}$.
+        2. Denote the points covariance matrix be $A$ and center point be $\bar{p}$.
+            $$
+                \bar{p} = \frac{1}{N} \sum_{i=1}^{N} \ ^{W}p_i
+                \;\;
+                A = \frac{1}{N} \sum_{i=1}^{N} (\ ^{W}p_i - \bar{p})(\ ^{W}p_i - \bar{p})^T
+            $$
+        3. Then plane can be represented by 
+           1. $u \in \mathbb{R}^{3}$: Normal vector (eigenvector of $A$ corresponding to the smallest eigenvalue)
+           2. $q = \bar{p} \in \mathbb{R}^{3}$ : A center point lying on the plane 
+        4. As both $A$ and $q$ are dependent on $\ ^{W}p_i$, we can express ($u,q$) as a function of $\ ^{W}p_i$.
+            $$
+                [u,q]^T = f(\ ^{W}p_1, \ ^{W}p_2, \cdots, \ ^{W}p_N) \in \mathbb{R}^{6 \times 1}
+            $$
+        5. The groud truth plane feature is,
+            $$
+                [u^{gt}, q^{gt}]^T = f(\ ^{W}p_1 + \ ^{W}n_1, \ ^{W}p_2 + \ ^{W}n_2, \cdots, \ ^{W}p_N + \ ^{W}n_N)
+            $$
+
+        6. We can express the plane feature uncertainty as,
+            $$
+                [u^{gt}, q^{gt}]^T - [u,q]^T \approx F_1 \ ^{W}n_1 + F_2 \ ^{W}n_2 + \cdots + F_N \ ^{W}n_N = 
+                \sum_{i=1}^{N} F_i \ ^{W}n_i
+                \\
+                F_i = \frac{\partial f}{\partial \ ^{W}p_i} = \begin{bmatrix}
+                    \frac{\partial u}{\partial \ ^{W}p_i} \\ \frac{\partial q}{\partial \ ^{W}p_i}
+                \end{bmatrix}
+            $$
+            $$
+                \Sigma_{u,q} = \sum_{i=1}^{N} F_i \Sigma_{^{W}n_i} {F_i}^T
+            $$
+        7. It seen that $u,q$ are not independent of each other. 
+
+    3. Measurement Model
+        1. Equation
+            $$
+                0 = h^{\kappa}_j(x_k, n_j) = u^{\kappa}_j(\ ^{W}_{I_K}T^\kappa \cdot ( \ ^{I_k}p_j + ^{I_k}n_j) - q^{\kappa}_j) = u^{\kappa}_j(\ ^{W}p^\kappa _j - q^{\kappa}_j)
+            $$
+            $$
+                0 = h^{\kappa}_j(x_k, n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j) = (\hat{u}^{\kappa}_j \boxplus \delta u^{\kappa}_j)[  (\ ^{W}\hat{p}^{\kappa} + \ ^{W}n^\kappa_j) -  (\hat{q}^{\kappa}_j + \delta q_j^{\kappa})]
+            $$
+        2. First order approximation
+            $$
+                0 = h^{\kappa}_j(x_k, n_j) \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{W}n_j^\kappa} \ ^{W}n_j^\kappa
+            $$
+            $$ 
+                J_{u^{\kappa}_j} = (\ ^{W}\hat{p}^{\kappa} - \hat{q}^{\kappa}_j) \;,\; J_{q^{\kappa}_j} = -\hat{u}^{\kappa}_j \;,\; J_{\ ^{W}n_j^\kappa} = \hat{u}^{\kappa}_j
+            $$
+                
+        3. Residual(error of the measurement)
+            $$
+                r^{\kappa}_j = h^{\kappa}_j(x_k, n_j) - h^{\kappa}_j(\hat{x}_k^{\kappa},0) \approx H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{W}n_j^\kappa} \ ^{W}n_j^\kappa
+            $$
+            $$
+                J_{u^{\kappa}_j} = 
+            $$
+            1. For sake of simplicity, 
+            $$
+                r^{\kappa}_j = H^\kappa _j \widetilde{x}^\kappa _k + J_{u^{\kappa}_j} \delta u^{\kappa}_j + J_{q^{\kappa}_j} \delta q^{\kappa}_j + J_{\ ^{W}n_j^\kappa} \ ^{W}n_j^\kappa
+            $$
