@@ -268,3 +268,7 @@
                 $$
                     J_{u^{\kappa}_j} = (\ ^{W}\hat{p}^{\kappa} - \hat{q}^{\kappa}_j) \;,\; J_{q^{\kappa}_j} = -\hat{u}^{\kappa}_j \;,\; J_{\ ^{I_k}n_j} = \hat{u}^{\kappa}_j
                 $$
+
+                
+                
+                

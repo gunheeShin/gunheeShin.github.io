@@ -31,7 +31,7 @@
 
    3. $\boxplus$ / $\boxminus$ operator의 설명
       1. $^{M}\phi_x$는 $\, x \in \cal{M}$의 local 영역에서의 homeomorphism이다.
-      2. $boxplus$ / $boxminus$ operator를 통해 다음 식들도 유도할 수 있다.
+      2. $\boxplus$ / $\boxminus$ operator를 통해 다음 식들도 유도할 수 있다.
         $$ x \boxplus (y \boxminus x) = y$$
         $$ (x \boxplus u) \boxminus x = u \tag{3}$$
       3.  의 의미는 $x \in \cal{M}$에서 $u \in \mathbb{R}^n$만큼의 perturbation을 가한 점이라는 것이다.
