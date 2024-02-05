@@ -295,22 +295,34 @@
             0 = {u_j}^T(\ ^{W}_{I_k}T \cdot  \ ^{I}_{L}T ( \ ^{L_j}p_j + n_j) - q_j)
         $$
         $$
-            0 = h_j(x_k, \ ^{L_j}p_j + n_j)
+            0 = h_j(x_k, n_j)
         $$
         - $u_j$ : normal vector of the local plane
         - $q_j$ : a point lying on the local plane
         - $^{W}_{I_k}T$ :  corresponding body pose
         - $^{I}_{L}T$ : extrinsics between the LiDAR and the IMU(IMU w.r.t LiDAR)
 
-3. State Update
-    1. First, let see  $\kappa = 0$ th iteration, 
-        1. The propagated state and covariance impose a prior Gaussian distribution for the unknown state $x_k$
-        2. $\hat{x}_k^{\kappa} = \hat{x}_k$
-        3. We have prior error state distribution as,
+3. IteratedState Update
+    1. For the $\kappa $ th iteration, 
+        1. We have prior state distribution from forward propagation as,
             $$
-                \widetilde{x}^\kappa _k = x_k \boxminus \hat{x}_k \sim \mathcal{N}(0, \hat{P}_k)
+                x_k \boxminus \hat{x}_k \sim \mathcal{N}(0, \hat{P}_k)
             $$
-        3. By using the prior pose and the LiDAR measurements, we can fomulate the measurement model.
+            and measurement model as,
+            $$
+                0 = h^{\kappa}_j(x_k, n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j) 
+            $$
+            - For the first iteration, $\hat{x}_k^{\kappa} = \hat{x}_k$ and $J^{\kappa} = I$
+        2. Note that the prior distribution for $x_k$ lies in the homogeneous spac at the $\hat{x}_k$. While the measurement model is defined in terms of $\widetilde{x}_k^{\kappa}$, which lies in the tangent space at $\hat{x}_k^{\kappa}$.
+        3. To combine them into a posterior distribution, we need to project them into the same space.
+        4. In order to project the prior distribution into the local homogeneous space at $\hat{x}_k^{\kappa}$ and express in terms of $\widetilde{x}_k^{\kappa}$, 
+            $$
+                x_k \boxminus \hat{x}_k = (\hat{x}_k^{\kappa} \boxplus \widetilde{x}_k^{\kappa}) \boxminus \hat{x}_k \approx \hat{x}_k^{\kappa} \boxminus \hat{x}_k + J^{\kappa} \widetilde{x}_k^{\kappa}
+            $$
+            $$
+                \widetilde{x}_k^{\kappa} \sim \mathcal{N}(-{J^{\kappa}}^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k), {J^{\kappa}}^{-1} \hat{P}_k {J^{\kappa}}^{-T})
+            $$
+        5. By using the prior pose and the LiDAR measurements, we can fomulate the measurement model.
             $$
                 \begin{array}{lcl}
                 0 = h^{\kappa}_j(x_k, n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j) 
@@ -322,35 +334,32 @@
                 v_j^{\kappa} \sim \mathcal{N}(0, R_j^{\kappa})
                 \end{array}
             $$  
-        4. Combining the prior distribution with the measurement model, we can obtain the posterior distribution of the state equivalently represented by the error state and tis maximum a-posteriori estimate (MAP):
+
+        6. Combining the prior distribution with the measurement model, we can obtain the posterior distribution of the state equivalently represented by the error state and tis maximum a-posteriori estimate (MAP):
             $$
-                \min_{\widetilde{x}^\kappa _k} (\left \| \widetilde{x}^\kappa _k \right \|_{\hat{P}_k}^2 + \left \| z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k \right \|_{R_j^{\kappa}}^2)
+                \min_{\widetilde{x}^\kappa _k} (\left \| x_k \boxminus \hat{x}_k \right \|_{\hat{P}_k}^2 + \sum_{j}^{m}
+                \left \| z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k \right \|_{R_j^{\kappa}}^2)
             $$
-        5. Optimizing the resultant quadratic cost leads to the standard kalman filter.
+
+        7. Optimizing the resultant quadratic cost leads to the standard kalman filter.
             $$
                 K=PH^T(HPH^T+R)^{-1}
             $$
             $$
-                \hat{x}_k^{\kappa+1} = \hat{x}_k^{\kappa} \boxplus (-Kz_j^{\kappa} + (I-KH)\widetilde{x}_k^{\kappa})
+                \hat{x}_k^{\kappa+1} = \hat{x}_k^{\kappa} \boxplus (\widetilde{x}_k^{\kappa} + K(z_k^{\kappa} - H((J^{\kappa})^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k))))
             $$
-
-            1. $H$ matrix
+            - where
+                $$
+                    P = (J^{\kappa})^{-1}\hat{P}_k(J^{\kappa})^{-T}
+                $$
                 $$
                     H^{\kappa} = \begin{bmatrix}
-                        H^{\kappa}_1 \\ H^{\kappa}_2 \\ \vdots \\ H^{\kappa}_j \\ \vdots \\ H^{\kappa}_m
+                        {H^{\kappa}_1}^T , \cdots, {H^{\kappa}_j}^T, \cdots, {H^{\kappa}_m}^T
                     \end{bmatrix}
-                    \;\;
-                    H^{\kappa} \in \mathbb{R}^{m \times 15}
                 $$
-
-            2. $R$ matrix
                 $$
                     R^{\kappa} = diag(R^{\kappa}_1, R^{\kappa}_2, \cdots, R^{\kappa}_j, \cdots, R^{\kappa}_m)
-                    \;\;
-                    R^{\kappa} \in \mathbb{R}^{m \times m}
                 $$
-            
-
-
-
-We set the updated state as the prior state for the next iteration.
+                $$
+                    z^{\kappa}_k = [z^{\kappa}_1, \cdots, z^{\kappa}_j, \cdots, z^{\kappa}_m]^T
+                $$
