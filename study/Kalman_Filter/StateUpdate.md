@@ -160,7 +160,7 @@
             $$
     4. Final Measurement Model
         1. We want to express measurement model w.r.t $\widetilde{x}$
-        2. For $\kappa$th iteration, 
+        2. For $\kappa$ th iteration, 
             1. Measurement model is always zero. which is,
                 $$
                     0 = h^{\kappa}_j(x_k, n) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n) =z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k + v^{\kappa}_j
@@ -270,5 +270,87 @@
                 $$
 
                 
-                
-                
+### Measurement Model expalined in FAST-LIO2
+1. Back Propagation
+    1. LiDAR typically samples points one after another. 
+        1. The resultant points are therefore sampled at different poses when the LiDAR undergoes continuous motion.
+    2. To correct this in-scan motion, we employ the backpropagation proposed in [22], which estimates the LiDAR pose of each point in the scan with respect to the pose at the scan end time based on IMU measurements.
+    2. To correct this in-scan motion, 
+        1. Based on the exact sampling time of each individual point in the scan and IMU measurements, we first estimate the LiDAR pose of each point in the scan with respect to the pose at the scan end-time
+        2. Then, we project all the points to the end time.
+        3. As a result, points in the scan can be viewed as all sampled simultaneously at the end-time.
+
+2. Measurement Model
+    1. Our measurement model starts from the following assumptions:
+        - For each LiDAR point, the local plane defined by its nearby points in the map is assumed to be where the point truly belongs to.
+        1. This assumption enables us to model the measurement model as a point-to-plane distance.
+    2. Due to LiDAR measurement noise, each measured point $\ ^{L_j}p_j$ is typically contaminated by a noise $\ n_j$ consisting of the ranging and bearing noise.
+        1. Removing this noise leads to the true point location in the local LiDAR frame.
+        $$
+            \ ^{L_j}p_j^{gt} = \ ^{L_j}p_j + n_j
+        $$
+
+    3. This true point, after projecting to the global frame, should lie on the local plane.
+        $$
+            0 = {u_j}^T(\ ^{W}_{I_k}T \cdot  \ ^{I}_{L}T ( \ ^{L_j}p_j + n_j) - q_j)
+        $$
+        $$
+            0 = h_j(x_k, \ ^{L_j}p_j + n_j)
+        $$
+        - $u_j$ : normal vector of the local plane
+        - $q_j$ : a point lying on the local plane
+        - $^{W}_{I_k}T$ :  corresponding body pose
+        - $^{I}_{L}T$ : extrinsics between the LiDAR and the IMU(IMU w.r.t LiDAR)
+
+3. State Update
+    1. First, let see  $\kappa = 0$ th iteration, 
+        1. The propagated state and covariance impose a prior Gaussian distribution for the unknown state $x_k$
+        2. $\hat{x}_k^{\kappa} = \hat{x}_k$
+        3. We have prior error state distribution as,
+            $$
+                \widetilde{x}^\kappa _k = x_k \boxminus \hat{x}_k \sim \mathcal{N}(0, \hat{P}_k)
+            $$
+        3. By using the prior pose and the LiDAR measurements, we can fomulate the measurement model.
+            $$
+                \begin{array}{lcl}
+                0 = h^{\kappa}_j(x_k, n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,n_j) 
+                 \approx h^{\kappa}_j(\hat{x}_k^{\kappa},0) + H^\kappa _j \widetilde{x}^\kappa _k + v_j^{\kappa}
+                \\
+                \phantom{aaaaaaaaaaaaaaaaaaaaaaaaaaa}
+                = z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k +v_j^{\kappa}
+                \quad
+                v_j^{\kappa} \sim \mathcal{N}(0, R_j^{\kappa})
+                \end{array}
+            $$  
+        4. Combining the prior distribution with the measurement model, we can obtain the posterior distribution of the state equivalently represented by the error state and tis maximum a-posteriori estimate (MAP):
+            $$
+                \min_{\widetilde{x}^\kappa _k} (\left \| \widetilde{x}^\kappa _k \right \|_{\hat{P}_k}^2 + \left \| z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k \right \|_{R_j^{\kappa}}^2)
+            $$
+        5. Optimizing the resultant quadratic cost leads to the standard kalman filter.
+            $$
+                K=PH^T(HPH^T+R)^{-1}
+            $$
+            $$
+                \hat{x}_k^{\kappa+1} = \hat{x}_k^{\kappa} \boxplus (-Kz_j^{\kappa} + (I-KH)\widetilde{x}_k^{\kappa})
+            $$
+
+            1. $H$ matrix
+                $$
+                    H^{\kappa} = \begin{bmatrix}
+                        H^{\kappa}_1 \\ H^{\kappa}_2 \\ \vdots \\ H^{\kappa}_j \\ \vdots \\ H^{\kappa}_m
+                    \end{bmatrix}
+                    \;\;
+                    H^{\kappa} \in \mathbb{R}^{m \times 15}
+                $$
+
+            2. $R$ matrix
+                $$
+                    R^{\kappa} = diag(R^{\kappa}_1, R^{\kappa}_2, \cdots, R^{\kappa}_j, \cdots, R^{\kappa}_m)
+                    \;\;
+                    R^{\kappa} \in \mathbb{R}^{m \times m}
+                $$
+            
+
+
+
+We set the updated state as the prior state for the next iteration.

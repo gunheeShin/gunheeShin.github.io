@@ -17,17 +17,16 @@
     $$ 
         \boxplus : \cal{M} \times \mathbb{R}^n \rightarrow \cal{M} $$
     $$
-        x \boxplus u = ^{\cal{M}}\phi^{-1}_x(u)
-        \tag{1} 
+        x \boxplus u = ^{\cal{M}}\varphi ^{-1}_x(u)
     $$
 
    2. $\boxminus$ operator
         $$ 
             \boxminus : \cal{M} \times \cal{M} \rightarrow \mathbb{R}^n $$
         $$
-            y \boxminus x = ^{\cal{M}}\phi_x(y)
-            \tag{2} 
+            y \boxminus x = ^{\cal{M}}\varphi_x(y) 
      $$
+
 
    3. $\boxplus$ / $\boxminus$ operator의 설명
       1. $^{M}\phi_x$는 $\, x \in \cal{M}$의 local 영역에서의 homeomorphism이다.
