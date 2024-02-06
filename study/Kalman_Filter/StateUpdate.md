@@ -25,7 +25,7 @@
 
     1. Point covariance $\ ^{L_j}n_j$$
         1. In practice, LiDAR mesures the bearing direction by encoders of the scanning motor, and the depth by computing the laser time-of-flight.
-        2. Let, $w_j \in \mathbb{S}^2$ be the measured bearing direction and $\delta w_j \sim \mathcal{N}(0_{2 \times 1}, \Sigma_{w_j})$ be the measurement noise in the tangent space of $\mathbb{S}^2$.
+        2. Let, $w_j \in \mathbb{S}^2$ be the measured bearing direction and $\delta w_j \sim \mathcal{N}(0_{2 \times 1}, \Sigma_{w_j})$ be the bearing direction noise in the tangent plane of $w_j$.
             1. $w_j$ is actually a unit vector which is $w_j \in \mathbb{R}^3$. $\;\; S=S^2 \cong \left \{ x \in \mathbb{R}^3 \mid \|x\| = r, r \gt 0 \right \}$
             2. The reason why we utilize the fact that $w_j \in \mathbb{S}^2$ is that we can minimally parameterize the measurement noise $\delta w_j$.
             $$

@@ -163,6 +163,118 @@ $$
 
 ---
 
+$$
+  \ ^{L_j}p_j^{gt} = \ ^{L_j}p_j + n_j
+$$
+$$
+  0 = {u_j}^T(\ ^{W}_{I_k}T \cdot  \ ^{I}_{L}T ( \ ^{L_j}p_j + n_j) - q_j)
+$$
+- $u_j$ : normal vector of the local plane
+- $q_j$ : a point lying on the local plane
+- $^{W}_{I_k}T$ :  corresponding body pose
+- $^{I}_{L}T$ : extrinsics between the LiDAR and the IMU(IMU w.r.t LiDAR)
+
+---
+
+$$
+  x_k \boxminus \hat{x}_k \sim \mathcal{N}(0, \hat{P}_k)
+$$
+$$
+  0 = h^{\kappa}_j(x_k, \ ^{L_j}p_j + n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k, \ ^{L_j}p_j + n_j)
+$$
+- For the first iteration, $\hat{x}_k^{\kappa} = \hat{x}_k$ and $J^{\kappa} = I$
+
+$$
+  x_k \boxminus \hat{x}_k = (\hat{x}_k^{\kappa} \boxplus \widetilde{x}_k^{\kappa}) \boxminus \hat{x}_k \approx \hat{x}_k^{\kappa} \boxminus \hat{x}_k + J^{\kappa} \widetilde{x}_k^{\kappa}
+$$
+$$
+  \widetilde{x}_k^{\kappa} \sim \mathcal{N}(-{J^{\kappa}}^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k), {J^{\kappa}}^{-1} \hat{P}_k {J^{\kappa}}^{-T})
+$$
+- $J^{\kappa}$ : $\frac{\partial (\hat{x}_k^{\kappa} \boxplus \widetilde{x}_k^{\kappa}) \boxminus \hat{x}_k}{\partial \widetilde{x}_k^{\kappa}}|_{\widetilde{x}_k^{\kappa} = 0}$
+
+$$
+  \begin{array}{lcl}
+  0 = h^{\kappa}_j(x_k, \ ^{L_j}p_j + n_j) = h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,\ ^{L_j}p_j + n_j) 
+    \approx h^{\kappa}_j(\hat{x}_k^{\kappa},\ ^{L_j}p_j) + H^\kappa _j \widetilde{x}^\kappa _k + D^\kappa _j n_j
+  \\
+  \phantom{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}
+  = z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k +v_j^{\kappa}
+  \quad
+  v_j^{\kappa} \sim \mathcal{N}(0, R)
+  \end{array}
+$$ 
+$$
+  H^\kappa _j = \frac{\partial h^{\kappa}_j(\hat{x}_k^{\kappa} \boxplus \widetilde{x}^\kappa _k,\ ^{L_j}p_j)}{\partial \widetilde{x}^\kappa _k}
+  \qquad
+  D^\kappa _j = \frac{\partial h^{\kappa}_j(\hat{x}_k^{\kappa},\ ^{L_j}p_j + n_j)}{\partial n_j}
+$$
+
+$$
+  \min_{\widetilde{x}^\kappa _k} (\left \| x_k \boxminus \hat{x}_k \right \|_{\hat{P}_k}^2 + \sum_{j}^{m}
+  \left \| z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k \right \|_{R}^2)
+$$
+
+$$
+    K=PH^T(HPH^T+R)^{-1}
+$$
+$$
+    \hat{x}_k^{\kappa+1} = \hat{x}_k^{\kappa} \boxplus (\widetilde{x}_k^{\kappa} + K(z_k^{\kappa} - H((J^{\kappa})^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k))))
+$$
+- where
+    $$
+        P = (J^{\kappa})^{-1}\hat{P}_k(J^{\kappa})^{-T}
+    $$
+    $$
+        H^{\kappa} = \begin{bmatrix}
+            {H^{\kappa}_1}^T , \cdots, {H^{\kappa}_j}^T, \cdots, {H^{\kappa}_m}^T
+        \end{bmatrix}
+    $$
+    $$
+        R^{\kappa} = diag(R^{\kappa}_1, R^{\kappa}_2, \cdots, R^{\kappa}_j, \cdots, R^{\kappa}_m)
+    $$
+    $$
+        z^{\kappa}_k = [z^{\kappa}_1, \cdots, z^{\kappa}_j, \cdots, z^{\kappa}_m]^T
+    $$
+
+---
+
+$$
+  w_j \in \mathbb{S}^2 
+  \qquad
+  \delta w_j \sim \mathcal{N}(0_{2 \times 1}, \Sigma_{w_j})
+$$
+$$
+    w^{gt}_j = w_i \boxplus_{\mathbb{S}^2} \delta w_j \cong e^{{\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\times}} w_j = \left ( I + {\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\times} \right ) w_j
+$$
+
+
+$$
+  d^{gt}_j = d_j + \delta d_j
+$$
+
+$$
+  \ ^{L_j}p_j = d_j w_j
+$$ 
+$$
+  \ ^{L_j}\hat{p}_j + \ ^{L_j}n_j = d^{gt}_j w^{gt}_j = (d_j + \delta d_j) \left \{ \left ( I + {\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\times} \right ) w_j \right \}
+$$
+$$
+  ^{L_j}n_j = w_i \delta d_j - d_j {\left \lfloor w_j \right \rfloor}_{\times} N(w_j) \delta w_j
+$$
+
+---
+$$
+    \ ^{W}p_j = \ ^{W}_{I_K}T \cdot \ ^{I_k}p_j
+$$
+$$
+    \ ^{W}\hat{p}_j + \ ^{W}n_j = \ ^{W}_{I_K}\hat{R} \cdot Exp(\delta \ ^{W}_{I_K} \theta) \cdot (\ ^{I_k}\hat{p}_j \boxplus \ ^{I_k}n_j) + \ ^{W}_{I_K}\hat{t} + \delta \ ^{W}_{I_K} t
+$$
+$$
+    \Sigma_{^{W}n_j} = \ ^{W}_{I_K}\hat{R} \cdot \Sigma_{^{I_k}n_j} \cdot \ ^{W}_{I_K}\hat{R}^T + (\ ^{W}_{I_K}\hat{R} \left \lfloor -\ ^{I_k}\hat{p}_j \right \rfloor) \cdot \Sigma_{\delta \ ^{W}_{I_K} \theta } \cdot (\ ^{W}_{I_K}\hat{R} \left \lfloor- \ ^{I_k}\hat{p}_j \right \rfloor)^T + \Sigma_{ \delta \ ^{W}_{I_K} t }
+
+$$
+---
+
 
     
 
