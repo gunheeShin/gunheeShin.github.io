@@ -29,7 +29,7 @@
             1. $w_j$ is actually a unit vector which is $w_j \in \mathbb{R}^3$. $\;\; S=S^2 \cong \left \{ x \in \mathbb{R}^3 \mid \|x\| = r, r \gt 0 \right \}$
             2. The reason why we utilize the fact that $w_j \in \mathbb{S}^2$ is that we can minimally parameterize the measurement noise $\delta w_j$.
             $$
-                w^{gt}_j = w_i \boxplus_{\mathbb{S}^2} \delta w_j \cong e^{{\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\times}} w_j = \left ( I + {\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\times} \right ) w_j
+                w^{gt}_j = w_i \boxplus_{\mathbb{S}^2} \delta w_j \cong e^{{\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\wedge}} w_j = \left ( I + {\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\wedge} \right ) w_j
             $$
         3. Let, $d_j$ be the measured depth and $\delta d_j \sim \mathcal{N}(0, \sigma_{d_j})$ be the range noise.
             $$ 
@@ -40,15 +40,15 @@
                 \ ^{L_j}p_j = d_j w_j
             $$ 
             $$
-                \ ^{L_j}\hat{p}_j + \ ^{L_j}n_j = d^{gt}_j w^{gt}_j = (d_j + \delta d_j) \left \{ \left ( I + {\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\times} \right ) w_j \right \}
+                \ ^{L_j}\hat{p}_j + \ ^{L_j}n_j = d^{gt}_j w^{gt}_j = (d_j + \delta d_j) \left \{ \left ( I + {\left \lfloor N(w_j)\delta w_j \right \rfloor}_{\wedge} \right ) w_j \right \}
             $$
             $$
-                ^{L_j}n_j = w_i \delta d_j - d_j {\left \lfloor w_j \right \rfloor}_{\times} N(w_j) \delta w_j
+                ^{L_j}n_j = w_i \delta d_j - d_j {\left \lfloor w_j \right \rfloor}_{\wedge} N(w_j) \delta w_j
             $$
         4. Finally, point covariance $^{L_j}n_j$ is,
             $$
                 \ ^{L_j}n_j = \begin{bmatrix}
-                    w_j & -d_j {\left \lfloor w_j \right \rfloor}_{\times} N(w_j)
+                    w_j & -d_j {\left \lfloor w_j \right \rfloor}_{\wedge} N(w_j)
                 \end{bmatrix} \begin{bmatrix}
                     \delta d_j \\ \delta w_j
                 \end{bmatrix} = A_j \begin{bmatrix}
@@ -299,7 +299,7 @@
         $$
         - $u_j$ : normal vector of the local plane
         - $q_j$ : a point lying on the local plane
-        - $^{W}_{I_k}T$ :  corresponding body pose
+        - $^{W}_{I_k}T$ :  corresponding body pose in world frame
         - $^{I}_{L}T$ : extrinsics between the LiDAR and the IMU(IMU w.r.t LiDAR)
 
 3. IteratedState Update
@@ -346,7 +346,7 @@
                 K=PH^T(HPH^T+R)^{-1}
             $$
             $$
-                \hat{x}_k^{\kappa+1} = \hat{x}_k^{\kappa} \boxplus (\widetilde{x}_k^{\kappa} + K(z_k^{\kappa} - H((J^{\kappa})^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k))))
+                \hat{x}_k^{\kappa+1} = \hat{x}_k^{\kappa} \boxplus (-((J^{\kappa})^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k)) + K(z_k^{\kappa} - H((J^{\kappa})^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k))))
             $$
             - where
                 $$
@@ -358,7 +358,7 @@
                     \end{bmatrix}
                 $$
                 $$
-                    R^{\kappa} = diag(R^{\kappa}_1, R^{\kappa}_2, \cdots, R^{\kappa}_j, \cdots, R^{\kappa}_m)
+                    R^{\kappa} = \mathrm{diag}(R^{\kappa}_1, R^{\kappa}_2, \cdots, R^{\kappa}_j, \cdots, R^{\kappa}_m)
                 $$
                 $$
                     z^{\kappa}_k = [z^{\kappa}_1, \cdots, z^{\kappa}_j, \cdots, z^{\kappa}_m]^T
