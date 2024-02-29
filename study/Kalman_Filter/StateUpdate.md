@@ -58,8 +58,10 @@
             $$
             $$
                 \Sigma_{^{L_j}n_j} = A_j \begin{bmatrix}
-                    \sigma_{d_j} & 0_{1 \times 2} \\ 0_{2 \times 1} & \Sigma_{w_j}
+                    \Sigma_{d_j} & 0_{1 \times 2} \\ 0_{2 \times 1} & \Sigma_{w_j}
                 \end{bmatrix} A_j^T
+                \;\;
+                = w_j \Sigma_{d_j} w_j^T + (-d_j {\left \lfloor w_j \right \rfloor}_{\wedge} N(w_j)) \Sigma_{w_j} (-d_j {\left \lfloor w_j \right \rfloor}_{\wedge} N(w_j))^T
             $$
     2. Point w.r.t IMU frame at time $\rho_j$ 
         $$
@@ -228,7 +230,8 @@
                 \end{bmatrix}
             $$
             $$
-                \Sigma_{u,q} = \sum_{i=1}^{N} F_i \Sigma_{^{W}n_i} {F_i}^T
+                \Sigma_{u,q} = \sum_{i=1}^{N} F_i \Sigma_{^{W}n_i} {F_i}^T = \sum_{i=1}^{N} \{ \frac{\partial u}{\partial \ ^{W}p_i} \Sigma_{^{W}n_i} \frac{\partial u}{\partial \ ^{W}p_i}^T + \frac{\partial q}{\partial \ ^{W}p_i} \Sigma_{^{W}n_i} \frac{\partial q}{\partial \ ^{W}p_i}^T \}
+                \in
             $$
         7. It seen that $u,q$ are not independent of each other. 
 
@@ -363,3 +366,15 @@
                 $$
                     z^{\kappa}_k = [z^{\kappa}_1, \cdots, z^{\kappa}_j, \cdots, z^{\kappa}_m]^T
                 $$
+
+---
+$$
+    \widetilde{x}_k^{\kappa} \sim \mathcal{N}(-{J^{\kappa}}^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k), {J^{\kappa}}^{-1} \hat{P}_k {J^{\kappa}}^{-T})
+$$
+
+$$
+    (\widetilde{x}_k^{\kappa} - (-{J^{\kappa}}^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k)))^T({J^{\kappa}}^{-1} \hat{P}_k {J^{\kappa}}^{-T})^{-1}(\widetilde{x}_k^{\kappa} - (-{J^{\kappa}}^{-1}(\hat{x}_k^{\kappa} \boxminus \hat{x}_k))) = \left \| x_k \boxminus \hat{x}_k \right \|_{\hat{P}_k}^2
+$$
+$$
+    (z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k)^T R_j^{-\kappa} (z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k) = \left \| z^{\kappa}_j + H^\kappa _j \widetilde{x}^\kappa _k \right \|_{R_j^{\kappa}}^2
+$$
