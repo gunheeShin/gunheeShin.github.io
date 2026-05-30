@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gunhee Shin — CV</title>
+<style>
+  /* ---- Page setup (A4, print) ---- */
+  @page {
+    size: A4;
+    margin: 18mm 16mm;
+  }
+
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --accent: #008AFF;
+    --rule: #d9d9d9;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+    font-family: "Charter", "Georgia", "Times New Roman", serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* On-screen preview: mimic an A4 sheet so editing looks like the PDF */
+  @media screen {
+    body {
+      background: #eee;
+      padding: 24px;
+    }
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 16mm;
+      background: #fff;
+      box-shadow: 0 1px 8px rgba(0,0,0,.2);
+    }
+  }
+  @media print {
+    .sheet { width: auto; padding: 0; }
+  }
+
+  /* ---- Header ---- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  header .name {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  header .tagline {
+    color: var(--muted);
+    font-size: 10pt;
+    margin-top: 2px;
+  }
+  header .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  header .contact a { color: var(--muted); text-decoration: none; }
+
+  /* ---- Sections ---- */
+  section { margin-bottom: 13px; }
+  h2 {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    margin: 0 0 7px 0;
+  }
+
+  .entry { margin-bottom: 9px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .entry .title { font-weight: 700; }
+  .entry .where { color: var(--muted); }
+  .entry .date {
+    color: var(--muted);
+    font-size: 9.5pt;
+    white-space: nowrap;
+  }
+  .entry ul { margin: 3px 0 0 0; padding-left: 18px; }
+  .entry li { margin-bottom: 2px; }
+
+  /* publications / honors list */
+  ol.pubs { margin: 0; padding-left: 20px; }
+  ol.pubs li { margin-bottom: 6px; }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li { margin-bottom: 4px; }
+  ul.plain .date { color: var(--muted); }
+
+  .skills-grid { }
+  .skills-grid .row2 { display: flex; gap: 8px; margin-bottom: 3px; }
+  .skills-grid .k { width: 120px; font-weight: 700; flex-shrink: 0; }
+
+  a { color: var(--accent); }
+
+  /* Placeholder styling — strip the .ph class once filled in */
+  .ph { color: #b00; }
+  @media print { .ph { color: var(--ink); } }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div>
+      <div class="name">Gunhee Shin</div>
+      <div class="tagline"><span class="ph">[ Tagline — e.g. M.S. Student, Robotics &amp; SLAM @ KAIST ]</span></div>
+    </div>
+    <div class="contact">
+      <div><a href="mailto:gunmaplehee@gmail.com">gunmaplehee@gmail.com</a> <span class="ph">(confirm)</span></div>
+      <div><a href="https://github.com/gunheeShin">github.com/gunheeShin</a></div>
+      <div><span class="ph">linkedin.com/in/...</span></div>
+      <div><span class="ph">Daejeon, South Korea</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title"><span class="ph">M.S. / Ph.D., (Major)</span></span> — <span class="where">KAIST (Korea Advanced Institute of Science and Technology)</span></div>
+        <div class="date"><span class="ph">20XX – 20XX</span></div>
+      </div>
+      <ul>
+        <li>Advisor: Prof. Hyun Myung<span class="ph"> — Lab name, thesis topic, GPA (optional)</span></li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title"><span class="ph">B.S., (Major)</span></span> — <span class="where"><span class="ph">University</span></span></div>
+        <div class="date"><span class="ph">20XX – 20XX</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Research Interests</h2>
+    <p>LiDAR-inertial odometry and SLAM, with a focus on state estimation on Lie groups (SE(3) manifold), uncertainty-aware sensor fusion, and Kalman filtering for accurate and robust robot localization.</p>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title"><span class="ph">Role</span></span> — <span class="where"><span class="ph">Organization / Lab</span></span></div>
+        <div class="date"><span class="ph">20XX – 20XX</span></div>
+      </div>
+      <ul>
+        <li class="ph">What you did / built / contributed.</li>
+        <li class="ph">Result or impact.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Publications</h2>
+    <ol class="pubs">
+      <li><strong>G. Shin</strong>, S. Lee, J. Kong, Y. Seo, and H. Myung. "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2026. <a href="https://arxiv.org/abs/2603.16118">arXiv:2603.16118</a> · <a href="https://se3-lio.github.io/">project page</a></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">SE(3)-LIO</span> — <span class="where"><a href="https://se3-lio.github.io/">se3-lio.github.io</a> · C++ / ROS</span></div>
+        <div class="date">2026</div>
+      </div>
+      <ul>
+        <li>ESKF-based LiDAR-inertial odometry that propagates 6-DoF poses jointly on the SE(3) manifold and characterizes relative-transformation uncertainty for motion compensation (UAMC).</li>
+        <li>Consistent accuracy and robustness over SOTA on NTU-VIRAL, Newer-College, and a large-scale rough-terrain dataset, at ~20 ms/scan real-time cost.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="row2"><div class="k">Languages</div><div>C++, Python<span class="ph"> (confirm)</span></div></div>
+      <div class="row2"><div class="k">Frameworks</div><div>ROS, Eigen<span class="ph">, PyTorch (confirm)</span></div></div>
+      <div class="row2"><div class="k">Tools</div><div>Docker, Git, CMake<span class="ph"> (confirm)</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Honors &amp; Awards</h2>
+    <ul class="plain">
+      <li class="ph">Award name <span class="date">— 20XX</span></li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>
