@@ -282,6 +282,8 @@ defaults:
 exclude:
   - CHANGELOG.md
   - CNAME
+  - Makefile
+  - scripts/
   - Gemfile
   - Gemfile.lock
   - LICENSE

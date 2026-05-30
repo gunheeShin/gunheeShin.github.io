@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- LAYOUT/STYLE template for the CV. Content comes from the Obsidian note
+     "71 Homepage/cv/CV.md" via scripts/sync_from_vault.py. Edit styling here,
+     edit content in Obsidian. The leading underscore keeps Jekyll from serving this file. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gunhee Shin — CV</title>
+<style>
+  /* ---- Page setup (A4, print) ---- */
+  @page {
+    size: A4;
+    margin: 18mm 16mm;
+  }
+
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --accent: #008AFF;
+    --rule: #d9d9d9;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+    font-family: "Charter", "Georgia", "Times New Roman", serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* On-screen preview: mimic an A4 sheet so editing looks like the PDF */
+  @media screen {
+    body {
+      background: #eee;
+      padding: 24px;
+    }
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 16mm;
+      background: #fff;
+      box-shadow: 0 1px 8px rgba(0,0,0,.2);
+    }
+  }
+  @media print {
+    .sheet { width: auto; padding: 0; }
+  }
+
+  /* ---- Header ---- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  header .name {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  header .tagline {
+    color: var(--muted);
+    font-size: 10pt;
+    margin-top: 2px;
+  }
+  header .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  header .contact a { color: var(--muted); text-decoration: none; }
+
+  /* ---- Sections ---- */
+  section { margin-bottom: 13px; }
+  h2 {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    margin: 0 0 7px 0;
+  }
+
+  .entry { margin-bottom: 9px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .entry .title { font-weight: 700; }
+  .entry .where { color: var(--muted); }
+  .entry .date {
+    color: var(--muted);
+    font-size: 9.5pt;
+    white-space: nowrap;
+  }
+  .entry ul { margin: 3px 0 0 0; padding-left: 18px; }
+  .entry li { margin-bottom: 2px; }
+
+  /* publications subheadings (Journal / Conference) */
+  h3.subhead {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin: 7px 0 4px 0;
+  }
+  h3.subhead:first-child { margin-top: 0; }
+
+  /* publications / honors list */
+  ol.pubs { margin: 0; padding-left: 20px; }
+  ol.pubs li { margin-bottom: 6px; }
+  ul.plain { list-style: none; margin: 0; padding: 0; }
+  ul.plain li { margin-bottom: 4px; }
+  ul.plain .date { color: var(--muted); }
+
+  .skills-grid { }
+  .skills-grid .row2 { display: flex; gap: 8px; margin-bottom: 3px; }
+  .skills-grid .k { width: 120px; font-weight: 700; flex-shrink: 0; }
+
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="sheet">
+<!-- CONTENT -->
+</div>
+</body>
+</html>

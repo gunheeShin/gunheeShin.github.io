@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- LAYOUT/STYLE template for the CV. Content comes from the Obsidian note
+     "71 Homepage/cv/CV.md" via scripts/sync_from_vault.py. Edit styling here,
+     edit content in Obsidian. The leading underscore keeps Jekyll from serving this file. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -103,6 +106,17 @@
   .entry ul { margin: 3px 0 0 0; padding-left: 18px; }
   .entry li { margin-bottom: 2px; }
 
+  /* publications subheadings (Journal / Conference) */
+  h3.subhead {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin: 7px 0 4px 0;
+  }
+  h3.subhead:first-child { margin-top: 0; }
+
   /* publications / honors list */
   ol.pubs { margin: 0; padding-left: 20px; }
   ol.pubs li { margin-bottom: 6px; }
@@ -115,103 +129,152 @@
   .skills-grid .k { width: 120px; font-weight: 700; flex-shrink: 0; }
 
   a { color: var(--accent); }
-
-  /* Placeholder styling — strip the .ph class once filled in */
-  .ph { color: #b00; }
-  @media print { .ph { color: var(--ink); } }
 </style>
 </head>
 <body>
 <div class="sheet">
-
   <header>
     <div>
       <div class="name">Gunhee Shin</div>
-      <div class="tagline"><span class="ph">[ Tagline — e.g. M.S. Student, Robotics &amp; SLAM @ KAIST ]</span></div>
+      <div class="tagline">PhD Student, Urban Robotics Lab @ KAIST</div>
     </div>
     <div class="contact">
-      <div><a href="mailto:gunmaplehee@gmail.com">gunmaplehee@gmail.com</a> <span class="ph">(confirm)</span></div>
+      <div><a href="mailto:gunhee_shin@kaist.ac.kr">gunhee_shin@kaist.ac.kr</a></div>
       <div><a href="https://github.com/gunheeShin">github.com/gunheeShin</a></div>
-      <div><span class="ph">linkedin.com/in/...</span></div>
-      <div><span class="ph">Daejeon, South Korea</span></div>
+      <div><a href="https://www.linkedin.com/in/gunheeshin-1490ba269">LinkedIn</a></div>
+      <div>Daejeon, South Korea</div>
     </div>
   </header>
-
   <section>
     <h2>Education</h2>
     <div class="entry">
       <div class="row">
-        <div><span class="title"><span class="ph">M.S. / Ph.D., (Major)</span></span> — <span class="where">KAIST (Korea Advanced Institute of Science and Technology)</span></div>
-        <div class="date"><span class="ph">20XX – 20XX</span></div>
+        <div><span class="title">Ph.D. Student, Electrical Engineering</span> — <span class="where">KAIST (Korea Advanced Institute of Science and Technology)</span></div>
+        <div class="date">2025 – Present</div>
       </div>
       <ul>
-        <li>Advisor: Prof. Hyun Myung<span class="ph"> — Lab name, thesis topic, GPA (optional)</span></li>
+        <li>Advisor: Prof. Hyun Myung — Urban Robotics Lab</li>
       </ul>
     </div>
     <div class="entry">
       <div class="row">
-        <div><span class="title"><span class="ph">B.S., (Major)</span></span> — <span class="where"><span class="ph">University</span></span></div>
-        <div class="date"><span class="ph">20XX – 20XX</span></div>
+        <div><span class="title">M.S., Electrical Engineering</span> — <span class="where">KAIST (Korea Advanced Institute of Science and Technology)</span></div>
+        <div class="date">2023 – 2025</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">B.S., Electrical Engineering</span> — <span class="where">Inha University</span></div>
+        <div class="date">2017 – 2023</div>
       </div>
     </div>
   </section>
-
   <section>
     <h2>Research Interests</h2>
-    <p>LiDAR-inertial odometry and SLAM, with a focus on state estimation on Lie groups (SE(3) manifold), uncertainty-aware sensor fusion, and Kalman filtering for accurate and robust robot localization.</p>
+    <p>My research builds robust state estimation, LiDAR-inertial odometry, and SLAM algorithms that let mobile robots and autonomous vehicles operate reliably in real-world environments.</p>
   </section>
-
   <section>
     <h2>Experience</h2>
     <div class="entry">
       <div class="row">
-        <div><span class="title"><span class="ph">Role</span></span> — <span class="where"><span class="ph">Organization / Lab</span></span></div>
-        <div class="date"><span class="ph">20XX – 20XX</span></div>
+        <div><span class="title">Research Intern</span> — <span class="where">Urban Robotics Lab, KAIST</span></div>
+        <div class="date">Apr. 2022 – Dec. 2022</div>
       </div>
       <ul>
-        <li class="ph">What you did / built / contributed.</li>
-        <li class="ph">Result or impact.</li>
+        <li>Developed a target-based camera–LiDAR extrinsic calibration pipeline.</li>
+        <li>Worked on radar odometry for robust ego-motion estimation.</li>
       </ul>
     </div>
   </section>
-
   <section>
     <h2>Publications</h2>
+    <h3 class="subhead">Journal Articles</h3>
     <ol class="pubs">
-      <li><strong>G. Shin</strong>, S. Lee, J. Kong, Y. Seo, and H. Myung. "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2026. <a href="https://arxiv.org/abs/2603.16118">arXiv:2603.16118</a> · <a href="https://se3-lio.github.io/">project page</a></li>
+      <li><strong>G. Shin</strong>, J. Choi, and K. Kim. "A Fast Correspondence Matching for Iterative Closest Point Algorithm." <em>The Journal of Korea Robotics Society</em>, vol. 17, no. 3, pp. 373–380, 2022.</li>
+    </ol>
+    <h3 class="subhead">Conference Papers</h3>
+    <ol class="pubs">
+      <li><strong>G. Shin</strong>, S. Lee, J. Kong, Y.-W. Seo, and H. Myung. "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2026. <a href="https://arxiv.org/abs/2603.16118">arXiv:2603.16118</a> · <a href="https://se3-lio.github.io/">project page</a></li>
+      <li>H. Lim, D. Kim, <strong>G. Shin</strong>, J. Shi, I. Vizzo, H. Myung, J. Park, and L. Carlone. "KISS-Matcher: Fast and Robust Point Cloud Registration Revisited." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2025. <a href="https://arxiv.org/abs/2409.15615">arXiv:2409.15615</a></li>
+      <li><strong>G. Shin</strong>, S. Lee, M. Oh, D. Lee, J. Lee, Y. Seo, and H. Myung. "NM-LIO: Multiple LiDAR-Inertial Odometry Addressing LiDAR Measurement Noise Discrepancy." <em>International Conference on Robot Intelligence Technology and Applications (RiTA)</em>, 2024.</li>
+      <li>M. Oh, <strong>G. Shin</strong>, S. Jang, S. Lee, D. Lee, W. Song, B. Yu, H. Lim, J. Lee, and H. Myung. "B-TMS: Bayesian Traversable Terrain Modeling and Segmentation Across 3D LiDAR Scans and Maps for Enhanced Off-Road Navigation." <em>IEEE Intelligent Vehicles Symposium (IV) Workshop</em>, 2024. <a href="https://arxiv.org/abs/2406.18138">arXiv:2406.18138</a></li>
+      <li>H. Lim, K. Han, <strong>G. Shin</strong>, G. Kim, S. Hong, and H. Myung. "ORORA: Outlier-Robust Radar Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2023.</li>
     </ol>
   </section>
-
   <section>
     <h2>Projects</h2>
     <div class="entry">
       <div class="row">
-        <div><span class="title">SE(3)-LIO</span> — <span class="where"><a href="https://se3-lio.github.io/">se3-lio.github.io</a> · C++ / ROS</span></div>
-        <div class="date">2026</div>
+        <div><span class="title">Targetless Multi-Sensor Calibration & SCLAM</span> — <span class="where">Team Lead</span></div>
+        <div class="date">2025.06 – 2027.05</div>
       </div>
       <ul>
-        <li>ESKF-based LiDAR-inertial odometry that propagates 6-DoF poses jointly on the SE(3) manifold and characterizes relative-transformation uncertainty for motion compensation (UAMC).</li>
-        <li>Consistent accuracy and robustness over SOTA on NTU-VIRAL, Newer-College, and a large-scale rough-terrain dataset, at ~20 ms/scan real-time cost.</li>
+        <li>Targetless online LiDAR–camera–radar calibration with calibration-quality monitoring, and SCLAM (Simultaneous Calibration, Localization, and Mapping).</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">GNSS-Denied Localization & SLAM in Unstructured Environments</span></div>
+        <div class="date">2024.08 – 2026.07</div>
+      </div>
+      <ul>
+        <li>Jamming-robust localization via satellite-image-based global pose estimation, and robust SLAM in unstructured environments.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">Robust Perception in Off-Road Terrain</span></div>
+        <div class="date">2024.08 – 2025.02</div>
+      </div>
+      <ul>
+        <li>Environment-change-robust perception and unstructured / off-road terrain information extraction.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">Semantic SLAM for Spatial AI</span></div>
+        <div class="date">2023.04 – 2023.12</div>
+      </div>
+      <ul>
+        <li>Benchmarked and evaluated state-of-the-art semantic SLAM (e.g., Hydra) in real-world environments and proposed improvement directions for spatial-AI applications.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">SLAM & Perception for Autonomous Legged Robots</span></div>
+        <div class="date">2022.08 – 2027.12</div>
+      </div>
+      <ul>
+        <li>SLAM and object detection in dynamic, unstructured environments for autonomous multi-robot legged locomotion.</li>
+      </ul>
+    </div>
+    <div class="entry">
+      <div class="row">
+        <div><span class="title">Outdoor Multi-Sensor Fusion SLAM & Navigation</span></div>
+        <div class="date">2022.03 – 2022.12</div>
+      </div>
+      <ul>
+        <li>Camera–LiDAR–IMU fusion SLAM with real-time path planning and traversability mapping for outdoor ground-robot navigation (target: under 0.5 m translation error over a 1 km drive).</li>
       </ul>
     </div>
   </section>
-
   <section>
     <h2>Skills</h2>
     <div class="skills-grid">
-      <div class="row2"><div class="k">Languages</div><div>C++, Python<span class="ph"> (confirm)</span></div></div>
-      <div class="row2"><div class="k">Frameworks</div><div>ROS, Eigen<span class="ph">, PyTorch (confirm)</span></div></div>
-      <div class="row2"><div class="k">Tools</div><div>Docker, Git, CMake<span class="ph"> (confirm)</span></div></div>
+      <div class="row2"><div class="k">Languages</div><div>C++, Python</div></div>
+      <div class="row2"><div class="k">Frameworks</div><div>ROS, Eigen</div></div>
+      <div class="row2"><div class="k">Tools</div><div>Docker, Git, CMake</div></div>
     </div>
   </section>
-
   <section>
     <h2>Honors &amp; Awards</h2>
     <ul class="plain">
-      <li class="ph">Award name <span class="date">— 20XX</span></li>
+      <li>1st Place, Nothing Stands Still (NSS) Challenge, CVPR 2026, Denver, USA — responsible for multi-way registration</li>
+      <li>2nd Place, 3rd Quadruped Robot Challenge (QRC), IEEE ICRA 2025, Atlanta, USA — responsible for pose estimation</li>
+      <li>2nd Place, 2nd Quadruped Robot Challenge (QRC), IEEE ICRA 2024, Yokohama, Japan — responsible for pose estimation</li>
+      <li>1st Place, LiDAR Single-Session — HILTI SLAM Challenge, IEEE ICRA 2023 (1st of 63 teams, with AdaLIO: Adaptive LiDAR-Inertial Odometry)</li>
     </ul>
   </section>
-
 </div>
 </body>
 </html>
