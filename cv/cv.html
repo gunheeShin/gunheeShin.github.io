@@ -124,6 +124,8 @@
   ul.plain li { margin-bottom: 4px; }
   ul.plain .date { color: var(--muted); }
 
+  .pub-note { color: var(--muted); font-size: 8.5pt; margin-top: 4px; }
+
   .skills-grid { }
   .skills-grid .row2 { display: flex; gap: 8px; margin-bottom: 3px; }
   .skills-grid .k { width: 120px; font-weight: 700; flex-shrink: 0; }
@@ -142,6 +144,7 @@
       <div><a href="mailto:gunhee_shin@kaist.ac.kr">gunhee_shin@kaist.ac.kr</a></div>
       <div><a href="https://github.com/gunheeShin">github.com/gunheeShin</a></div>
       <div><a href="https://www.linkedin.com/in/gunheeshin-1490ba269">LinkedIn</a></div>
+      <div><a href="https://scholar.google.com/citations?user=frMUTKMAAAAJ">Google Scholar</a></div>
       <div>Daejeon, South Korea</div>
     </div>
   </header>
@@ -161,6 +164,10 @@
         <div><span class="title">M.S., Electrical Engineering</span> — <span class="where">KAIST (Korea Advanced Institute of Science and Technology)</span></div>
         <div class="date">2023 – 2025</div>
       </div>
+      <ul>
+        <li>Advisor: Prof. Hyun Myung — Urban Robotics Lab</li>
+        <li>Thesis: "Uncertainty-aware Multiple LiDAR-Inertial Odometry for Outdoor Mobile Robots"</li>
+      </ul>
     </div>
     <div class="entry">
       <div class="row">
@@ -172,6 +179,31 @@
   <section>
     <h2>Research Interests</h2>
     <p>My research builds robust state estimation, LiDAR-inertial odometry, and SLAM algorithms that let mobile robots and autonomous vehicles operate reliably in real-world environments.</p>
+  </section>
+  <section>
+    <h2>Publications</h2>
+    <h3 class="subhead">Journal Articles</h3>
+    <ol class="pubs">
+      <li><strong>G. Shin</strong>, J. Choi, and K. Kim. "A Fast Correspondence Matching for Iterative Closest Point Algorithm." <em>The Journal of Korea Robotics Society</em>, vol. 17, no. 3, pp. 373–380, 2022.</li>
+    </ol>
+    <h3 class="subhead">Conference Papers</h3>
+    <ol class="pubs">
+      <li><strong>G. Shin</strong>, S. Lee, J. Kong, Y.-W. Seo, and H. Myung&dagger;. "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2026. <a href="https://arxiv.org/abs/2603.16118">arXiv:2603.16118</a> · <a href="https://se3-lio.github.io/">project page</a></li>
+      <li>H. Lim, D. Kim, <strong>G. Shin</strong>, J. Shi, I. Vizzo, H. Myung&dagger;, J. Park&dagger;, and L. Carlone. "KISS-Matcher: Fast and Robust Point Cloud Registration Revisited." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2025. <a href="https://arxiv.org/abs/2409.15615">arXiv:2409.15615</a></li>
+      <li><strong>G. Shin</strong>, S. Lee, M. Oh, D. Lee, J. Lee, Y. Seo, and H. Myung&dagger;. "NM-LIO: Multiple LiDAR-Inertial Odometry Addressing LiDAR Measurement Noise Discrepancy." <em>International Conference on Robot Intelligence Technology and Applications (RiTA)</em>, 2024.</li>
+      <li>M. Oh, <strong>G. Shin</strong>, S. Jang, S. Lee, D. Lee, W. Song, B. Yu, H. Lim, J. Lee, and H. Myung&dagger;. "B-TMS: Bayesian Traversable Terrain Modeling and Segmentation Across 3D LiDAR Scans and Maps for Enhanced Off-Road Navigation." <em>IEEE Intelligent Vehicles Symposium (IV) Workshop</em>, 2024. <a href="https://arxiv.org/abs/2406.18138">arXiv:2406.18138</a></li>
+      <li>H. Lim, K. Han, <strong>G. Shin</strong>, G. Kim, S. Hong, and H. Myung&dagger;. "ORORA: Outlier-Robust Radar Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2023.</li>
+    </ol>
+    <div class="pub-note">&dagger; Corresponding author</div>
+  </section>
+  <section>
+    <h2>Honors &amp; Awards</h2>
+    <ul class="plain">
+      <li>1st Place, Nothing Stands Still (NSS) Challenge, CVPR 2026, Denver, USA — responsible for multi-way registration</li>
+      <li>2nd Place, 3rd Quadruped Robot Challenge (QRC), IEEE ICRA 2025, Atlanta, USA — responsible for pose estimation</li>
+      <li>2nd Place, 2nd Quadruped Robot Challenge (QRC), IEEE ICRA 2024, Yokohama, Japan — responsible for pose estimation</li>
+      <li>1st Place, LiDAR Single-Session — HILTI SLAM Challenge, IEEE ICRA 2023 (1st of 63 teams, with AdaLIO: Adaptive LiDAR-Inertial Odometry)</li>
+    </ul>
   </section>
   <section>
     <h2>Experience</h2>
@@ -187,26 +219,11 @@
     </div>
   </section>
   <section>
-    <h2>Publications</h2>
-    <h3 class="subhead">Journal Articles</h3>
-    <ol class="pubs">
-      <li><strong>G. Shin</strong>, J. Choi, and K. Kim. "A Fast Correspondence Matching for Iterative Closest Point Algorithm." <em>The Journal of Korea Robotics Society</em>, vol. 17, no. 3, pp. 373–380, 2022.</li>
-    </ol>
-    <h3 class="subhead">Conference Papers</h3>
-    <ol class="pubs">
-      <li><strong>G. Shin</strong>, S. Lee, J. Kong, Y.-W. Seo, and H. Myung. "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2026. <a href="https://arxiv.org/abs/2603.16118">arXiv:2603.16118</a> · <a href="https://se3-lio.github.io/">project page</a></li>
-      <li>H. Lim, D. Kim, <strong>G. Shin</strong>, J. Shi, I. Vizzo, H. Myung, J. Park, and L. Carlone. "KISS-Matcher: Fast and Robust Point Cloud Registration Revisited." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2025. <a href="https://arxiv.org/abs/2409.15615">arXiv:2409.15615</a></li>
-      <li><strong>G. Shin</strong>, S. Lee, M. Oh, D. Lee, J. Lee, Y. Seo, and H. Myung. "NM-LIO: Multiple LiDAR-Inertial Odometry Addressing LiDAR Measurement Noise Discrepancy." <em>International Conference on Robot Intelligence Technology and Applications (RiTA)</em>, 2024.</li>
-      <li>M. Oh, <strong>G. Shin</strong>, S. Jang, S. Lee, D. Lee, W. Song, B. Yu, H. Lim, J. Lee, and H. Myung. "B-TMS: Bayesian Traversable Terrain Modeling and Segmentation Across 3D LiDAR Scans and Maps for Enhanced Off-Road Navigation." <em>IEEE Intelligent Vehicles Symposium (IV) Workshop</em>, 2024. <a href="https://arxiv.org/abs/2406.18138">arXiv:2406.18138</a></li>
-      <li>H. Lim, K. Han, <strong>G. Shin</strong>, G. Kim, S. Hong, and H. Myung. "ORORA: Outlier-Robust Radar Odometry." <em>IEEE International Conference on Robotics and Automation (ICRA)</em>, 2023.</li>
-    </ol>
-  </section>
-  <section>
     <h2>Projects</h2>
     <div class="entry">
       <div class="row">
         <div><span class="title">Targetless Multi-Sensor Calibration & SCLAM</span> — <span class="where">Team Lead</span></div>
-        <div class="date">2025.06 – 2027.05</div>
+        <div class="date">Jun. 2025 – May 2027</div>
       </div>
       <ul>
         <li>Targetless online LiDAR–camera–radar calibration with calibration-quality monitoring, and SCLAM (Simultaneous Calibration, Localization, and Mapping).</li>
@@ -215,7 +232,7 @@
     <div class="entry">
       <div class="row">
         <div><span class="title">GNSS-Denied Localization & SLAM in Unstructured Environments</span></div>
-        <div class="date">2024.08 – 2026.07</div>
+        <div class="date">Aug. 2024 – Jul. 2026</div>
       </div>
       <ul>
         <li>Jamming-robust localization via satellite-image-based global pose estimation, and robust SLAM in unstructured environments.</li>
@@ -224,7 +241,7 @@
     <div class="entry">
       <div class="row">
         <div><span class="title">Robust Perception in Off-Road Terrain</span></div>
-        <div class="date">2024.08 – 2025.02</div>
+        <div class="date">Aug. 2024 – Feb. 2025</div>
       </div>
       <ul>
         <li>Environment-change-robust perception and unstructured / off-road terrain information extraction.</li>
@@ -233,7 +250,7 @@
     <div class="entry">
       <div class="row">
         <div><span class="title">Semantic SLAM for Spatial AI</span></div>
-        <div class="date">2023.04 – 2023.12</div>
+        <div class="date">Apr. 2023 – Dec. 2023</div>
       </div>
       <ul>
         <li>Benchmarked and evaluated state-of-the-art semantic SLAM (e.g., Hydra) in real-world environments and proposed improvement directions for spatial-AI applications.</li>
@@ -242,7 +259,7 @@
     <div class="entry">
       <div class="row">
         <div><span class="title">SLAM & Perception for Autonomous Legged Robots</span></div>
-        <div class="date">2022.08 – 2027.12</div>
+        <div class="date">Aug. 2022 – Dec. 2027</div>
       </div>
       <ul>
         <li>SLAM and object detection in dynamic, unstructured environments for autonomous multi-robot legged locomotion.</li>
@@ -251,7 +268,7 @@
     <div class="entry">
       <div class="row">
         <div><span class="title">Outdoor Multi-Sensor Fusion SLAM & Navigation</span></div>
-        <div class="date">2022.03 – 2022.12</div>
+        <div class="date">Mar. 2022 – Dec. 2022</div>
       </div>
       <ul>
         <li>Camera–LiDAR–IMU fusion SLAM with real-time path planning and traversability mapping for outdoor ground-robot navigation (target: under 0.5 m translation error over a 1 km drive).</li>
@@ -262,18 +279,11 @@
     <h2>Skills</h2>
     <div class="skills-grid">
       <div class="row2"><div class="k">Languages</div><div>C++, Python</div></div>
-      <div class="row2"><div class="k">Frameworks</div><div>ROS, Eigen</div></div>
-      <div class="row2"><div class="k">Tools</div><div>Docker, Git, CMake</div></div>
+      <div class="row2"><div class="k">SLAM / Optimization</div><div>ROS, GTSAM, Ceres, g2o, Sophus, Eigen</div></div>
+      <div class="row2"><div class="k">Perception</div><div>PCL, Open3D, OpenCV</div></div>
+      <div class="row2"><div class="k">Deep Learning</div><div>PyTorch, CUDA</div></div>
+      <div class="row2"><div class="k">Tools</div><div>Docker, Git, CMake, Linux</div></div>
     </div>
-  </section>
-  <section>
-    <h2>Honors &amp; Awards</h2>
-    <ul class="plain">
-      <li>1st Place, Nothing Stands Still (NSS) Challenge, CVPR 2026, Denver, USA — responsible for multi-way registration</li>
-      <li>2nd Place, 3rd Quadruped Robot Challenge (QRC), IEEE ICRA 2025, Atlanta, USA — responsible for pose estimation</li>
-      <li>2nd Place, 2nd Quadruped Robot Challenge (QRC), IEEE ICRA 2024, Yokohama, Japan — responsible for pose estimation</li>
-      <li>1st Place, LiDAR Single-Session — HILTI SLAM Challenge, IEEE ICRA 2023 (1st of 63 teams, with AdaLIO: Adaptive LiDAR-Inertial Odometry)</li>
-    </ul>
   </section>
 </div>
 </body>

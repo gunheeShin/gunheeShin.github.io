@@ -5,30 +5,29 @@
   tags:
   - LiDAR SLAM
   - Calibration
-  description: Targetless online LiDAR–camera–radar calibration with calibration-quality
+  description: Targetless online LiDAR–camera–radar calibration with continuous quality
     monitoring, and SCLAM (Simultaneous Calibration, Localization, and Mapping).
 - name: GNSS-Denied Localization & SLAM in Unstructured Environments
   period: 2024.08 – 2026.07
   tags:
   - LiDAR SLAM
   - Visual SLAM
-  description: Jamming-robust localization via satellite-image-based global pose estimation,
-    and robust SLAM in unstructured environments.
+  description: Jamming-robust localization using satellite-image-based global pose
+    estimation, with robust SLAM for unstructured environments.
 - name: Robust Perception in Off-Road Terrain
   period: 2024.08 – 2025.02
   tags:
   - LiDAR SLAM
   - Visual SLAM
-  description: Environment-change-robust perception and unstructured / off-road terrain
-    information extraction.
+  description: Environment-change-robust perception and terrain information extraction
+    for off-road, unstructured environments.
 - name: Semantic SLAM for Spatial AI
   period: 2023.04 – 2023.12
   tags:
   - Visual SLAM
   - Semantic SLAM
-  description: Benchmarked and evaluated state-of-the-art semantic SLAM (e.g., Hydra)
-    in real-world environments and proposed improvement directions for spatial-AI
-    applications.
+  description: Benchmarked state-of-the-art semantic SLAM (e.g., Hydra) in real-world
+    environments and identified improvement directions for spatial-AI applications.
 - name: SLAM & Perception for Autonomous Legged Robots
   period: 2022.08 – 2027.12
   tags:
@@ -42,6 +41,6 @@
   - LiDAR SLAM
   - Visual SLAM
   - Navigation
-  description: 'Camera–LiDAR–IMU fusion SLAM with real-time path planning and traversability
-    mapping for outdoor ground-robot navigation (target: under 0.5 m translation error
-    over a 1 km drive).'
+  description: Camera–LiDAR–IMU fusion SLAM with real-time path planning and traversability
+    mapping for outdoor ground-robot navigation (~0.5 m translation error over a 1
+    km drive).
