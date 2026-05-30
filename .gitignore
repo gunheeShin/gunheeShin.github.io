@@ -3,6 +3,9 @@ _site
 .sass-cache
 .vagrant
 
+# local-only study notes (not published; LaTeX breaks Jekyll build)
+study/
+
 # general
 .DS_Store
 Thumbs.db
