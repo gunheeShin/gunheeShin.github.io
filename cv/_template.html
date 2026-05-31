@@ -52,15 +52,13 @@
 
   /* ---- Header ---- */
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    text-align: center;
     border-bottom: 2px solid var(--ink);
-    padding-bottom: 8px;
+    padding-bottom: 9px;
     margin-bottom: 14px;
   }
   header .name {
-    font-size: 22pt;
+    font-size: 23pt;
     font-weight: 700;
     letter-spacing: .5px;
   }
@@ -70,12 +68,12 @@
     margin-top: 2px;
   }
   header .contact {
-    text-align: right;
     font-size: 9pt;
     color: var(--muted);
-    line-height: 1.5;
+    margin-top: 5px;
   }
   header .contact a { color: var(--muted); text-decoration: none; }
+  header .contact .sep { margin: 0 6px; color: var(--rule); }
 
   /* ---- Sections ---- */
   section { margin-bottom: 13px; }
