@@ -1,0 +1,3 @@
+# Local preview only (docker/build.sh): serve _site through the vault server via Homepage/code link.
+baseurl: "/Documents/Obsidian Vault HTML/70-79 Life/71 Career/Homepage/code/_site"
+url: "http://localhost:8000"

@@ -1,0 +1,23 @@
+{% assign p = include.p %}
+<div class="proj-row">
+  <div class="proj-thumb">
+    {% if p.thumb != "" and p.thumb %}<img src="{{ p.thumb | relative_url }}" alt="{{ p.title }}" loading="lazy">{% else %}<div class="proj-thumb-ph"></div>{% endif %}
+  </div>
+  <div class="proj-body">
+    <div class="proj-title">
+      {% if p.page != "" and p.page %}<a href="{{ p.page | relative_url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}
+    </div>
+    <div class="proj-meta">
+      {% if p.result and p.result != "" %}<span class="proj-badge">{{ p.result }}</span>{% endif %}
+      {% if p.sponsor and p.sponsor != "" %}<span>{{ p.sponsor }}</span>{% endif %}
+      {% if p.venue and p.venue != "" %}<span>{{ p.venue }}</span>{% endif %}
+      {% if p.period and p.period != "" %}<span>{{ p.period }}</span>{% endif %}
+      {% if p.role and p.role != "" %}<span class="proj-role">Role: {{ p.role }}</span>{% endif %}
+    </div>
+    {% if p.summary and p.summary != "" %}<p class="proj-summary">{{ p.summary }}</p>{% endif %}
+    <div class="proj-links">
+      {% if p.page and p.page != "" %}<a href="{{ p.page | relative_url }}">details</a>{% endif %}
+      {% for l in p.links %}<a href="{{ l.url }}">{{ l.name }}</a>{% endfor %}
+    </div>
+  </div>
+</div>

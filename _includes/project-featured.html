@@ -1,0 +1,19 @@
+{% assign p = include.p %}
+{% assign odd = include.flip | modulo: 2 %}
+<div class="ft{% if odd == 1 %} ft-flip{% endif %}">
+  <div class="ft-img">
+    {% if p.thumb and p.thumb != "" %}<img src="{{ p.thumb | relative_url }}" alt="{{ p.title }}" loading="lazy">{% else %}<div class="proj-thumb-ph"></div>{% endif %}
+  </div>
+  <div class="ft-text">
+    <div class="ft-over">{% if p.result and p.result != "" %}{{ p.result }} · {% endif %}{% if p.venue and p.venue != "" %}{{ p.venue }}{% elsif p.sponsor %}{{ p.sponsor }}{% endif %}</div>
+    <h3 class="ft-title">{% if p.page and p.page != "" %}<a href="{{ p.page | relative_url }}">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</h3>
+    <div class="ft-card">
+      {% if p.role and p.role != "" %}<p class="ft-role">Role: {{ p.role }}</p>{% endif %}
+      {% if p.summary and p.summary != "" %}<p>{{ p.summary }}</p>{% endif %}
+    </div>
+    <div class="ft-links">
+      {% if p.page and p.page != "" %}<a href="{{ p.page | relative_url }}">Details &rarr;</a>{% endif %}
+      {% for l in p.links %}<a href="{{ l.url }}">{{ l.name }}</a>{% endfor %}
+    </div>
+  </div>
+</div>

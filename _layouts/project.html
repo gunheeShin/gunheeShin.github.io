@@ -1,0 +1,34 @@
+---
+layout: base
+---
+<!-- Project detail page, modeled on the academic project page (Nerfies) template:
+     centered title, meta, link buttons, a large big-picture figure, then narrow text sections. -->
+<main class="pj">
+  <header class="pj-hero">
+    {% if page.result and page.result != "" %}<div class="pj-result">{{ page.result }}</div>{% endif %}
+    <h1 class="pj-title">{{ page.title }}</h1>
+    {% if page.subtitle and page.subtitle != "" %}<p class="pj-subtitle">{{ page.subtitle }}</p>{% endif %}
+    <div class="pj-meta">
+      {% if page.sponsor and page.sponsor != "" %}<span>{{ page.sponsor }}</span>{% endif %}
+      {% if page.venue and page.venue != "" %}<span>{{ page.venue }}</span>{% endif %}
+      {% if page.period and page.period != "" %}<span>{{ page.period }}</span>{% endif %}
+      {% if page.role and page.role != "" %}<span>Role: {{ page.role }}</span>{% endif %}
+    </div>
+    {% if page.links %}<div class="pj-buttons">
+      {% for l in page.links %}<a class="pj-btn" href="{{ l.url }}">{{ l.name }}</a>{% endfor %}
+    </div>{% endif %}
+  </header>
+
+  {% if page.bigpicture and page.bigpicture != "" %}
+  <figure class="pj-teaser">
+    <img src="{{ page.bigpicture | relative_url }}" alt="{{ page.title }}">
+    {% if page.bigpicture_caption and page.bigpicture_caption != "" %}<figcaption>{{ page.bigpicture_caption }}</figcaption>{% endif %}
+  </figure>
+  {% endif %}
+
+  <article class="pj-body">
+    {{ content }}
+  </article>
+
+  <p class="pj-back"><a href="{{ '/projects' | relative_url }}">&larr; All projects</a></p>
+</main>
