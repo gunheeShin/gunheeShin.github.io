@@ -8,6 +8,7 @@ google-chrome \
   --headless \
   --disable-gpu \
   --no-pdf-header-footer \
+  --virtual-time-budget=10000 \
   --print-to-pdf=cv.pdf \
   "file://$PWD/cv.html"
 
