@@ -16,13 +16,11 @@
   title: "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold"
   venue: ICRA 2026
   thumb: /assets/img/projects/se3-lio.gif
-  page: ""
+  page: "/se3-lio/"
   summary: LiDAR-inertial odometry that propagates the IMU state jointly on SE(3), staying accurate under fast motion and vibration.
   links:
     - name: arXiv
       url: https://arxiv.org/abs/2603.16118
-    - name: project page
-      url: https://se3-lio.github.io/
     - name: code
       url: https://github.com/url-kaist/se3-lio
 
@@ -72,7 +70,7 @@
   title: Quadruped Robot Challenge
   venue: ICRA 2025
   result: 2nd Place
-  role: State estimation
+  role: Localization
   thumb: /assets/img/projects/qrc-2025.jpg
   page: "/projects/qrc-2025"
   summary: Legged robots cross rough-terrain lanes and complete inspection and manipulation tasks.
@@ -92,7 +90,7 @@
   title: HILTI SLAM Challenge (LiDAR Single-Session)
   venue: ICRA 2023
   result: Winner
-  role: LiDAR SLAM
+  role: Localization
   thumb: /assets/img/projects/hilti-2023.jpg
   page: "/projects/hilti-2023"
   summary: Estimate accurate trajectories from data recorded on construction sites, in narrow rooms, and in the dark. 63 teams took part.
@@ -142,7 +140,7 @@
   title: Semantic SLAM for Spatial AI
   sponsor: LG Electronics
   period: 2023
-  role: Semantic SLAM on real sensor data
+  role: Localization
   thumb: /assets/img/projects/lg-semantic-slam.jpg
   page: "/projects/lg-semantic-slam"
   summary: Build 3D scene graphs from real sensor data so a robot can follow commands like "go to the fridge" instead of coordinates.

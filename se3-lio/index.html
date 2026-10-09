@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry">
+  <meta name="keywords" content="LiDAR-Inertial Odometry, IMU Propagation, SE(3) Manifold, SLAM, Robotics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/emblem1.gif">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1;"></div>
+    <div class="navbar-end">
+      <a class="navbar-item">
+        <img src="./static/images/icra2026.png" alt="ICRA 2026" style="max-height: 5rem;">
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Gunhee Shin<sup>1</sup>,</span>
+            <span class="author-block">
+              Seungjae Lee<sup>1</sup>,</span>
+            <span class="author-block">
+              Jei Kong<sup>1</sup>,
+            </span>
+            <span class="author-block">
+              Youngwoo Seo<sup>2</sup>,
+            </span>
+            <span class="author-block">
+              Hyun Myung<sup>1*</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>KAIST,</span>
+            <span class="author-block"><sup>2</sup>Hanwha Aerospace</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (TBA)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2603.16118"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/PSinH_y6MH4"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/url-kaist/se3-lio"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/main_figure.png" alt="SE(3)-LIO Overview" style="width: 100%;">
+      <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+        Overview of the proposed IMU propagation and LiDAR-inertial odometry (SE(3)-LIO).
+        The IMU propagation is performed on SE(3) manifold to yield a smooth trajectory and accurate prior.
+        The joint distribution of predicted poses characterizes the relative transformation uncertainty,
+        which is incorporated into motion compensation to construct a probabilistic undistorted point cloud.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In estimating odometry accurately, an inertial measurement unit (IMU) is widely used owing to its high-rate measurements, which can be utilized to obtain motion information through IMU propagation.
+            In this paper, we address the limitations of existing IMU propagation methods in terms of motion prediction and motion compensation.
+          </p>
+          <p>
+            In motion prediction, the existing methods typically represent a 6-DoF pose by separating rotation and translation and propagate them on their respective manifold, so that the rotational variation is not effectively incorporated into translation propagation.
+            During motion compensation, the relative transformation between predicted poses is used to compensate motion-induced distortion in other measurements, while inherent errors in the predicted poses introduce uncertainty in the relative transformation.
+          </p>
+          <p>
+            To tackle these challenges, we represent and propagate the pose on SE(3) manifold, where propagated translation properly accounts for rotational variation.
+            Furthermore, we precisely characterize the relative transformation uncertainty by considering the correlation between predicted poses, and incorporate this uncertainty into the measurement noise during motion compensation.
+            To this end, we propose a LiDAR-inertial odometry (LIO), referred to as SE(3)-LIO, that integrates the proposed IMU propagation and uncertainty-aware motion compensation (UAMC).
+            We validate the effectiveness of SE(3)-LIO on diverse datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Explainer Video. -->
+    <div class="columns is-centered has-text-centered" style="margin-top: 2rem;">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <video controls muted loop playsinline width="100%">
+          <source src="./static/videos/se3-lio_explainer.mp4" type="video/mp4">
+        </video>
+        <p style="margin-top: 0.5rem;">
+          Also available on <a href="https://youtu.be/erPzpSX25Vw" target="_blank">YouTube</a>.
+        </p>
+      </div>
+    </div>
+    <!--/ Explainer Video. -->
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Framework. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            SE(3)-LIO consists of two key components: (1) smooth IMU propagation on SE(3) manifold
+            where rotation and translation are jointly propagated, and (2) uncertainty-aware motion
+            compensation (UAMC) that leverages the correlation between predicted poses to characterize
+            the relative transformation uncertainty.
+          </p>
+        </div>
+        <img src="./static/images/framework.png" alt="SE(3)-LIO Framework" style="width: 100%;">
+      </div>
+    </div>
+    <!--/ Framework. -->
+
+    <br/>
+
+    <!-- SE(3) Propagation & UAMC. -->
+    <div class="columns is-centered">
+
+      <div class="column has-text-centered">
+        <h2 class="title is-3">IMU Propagation on SE(3) manifold</h2>
+        <div class="content has-text-justified">
+          <p>
+            Unlike conventional methods that propagate rotation and translation separately on their
+            respective manifolds, SE(3)-LIO represents the 6-DoF pose on the SE(3) manifold and
+            propagates them jointly. This allows the propagated translation to properly account for
+            rotational variation, yielding more accurate motion prediction.
+          </p>
+        </div>
+        <img src="./static/images/pse3.png" alt="SE(3) Propagation" style="width: 100%;">
+      </div>
+
+      <div class="column has-text-centered">
+        <h2 class="title is-3">Uncertainty-Aware Motion Compensation (UAMC)</h2>
+        <div class="content has-text-justified">
+          <p>
+            SE(3)-LIO formally derives the joint distribution of the predicted poses, enabling
+            precise characterization of the relative transformation uncertainty by considering
+            their correlation. This uncertainty is incorporated into the measurement noise during
+            motion compensation to construct a probabilistic undistorted point cloud.
+          </p>
+        </div>
+        <img src="./static/images/uamc_analysis.png" alt="UAMC" style="width: 100%;">
+      </div>
+
+    </div>
+    <!--/ SE(3) Propagation & UAMC. -->
+
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Qualitative Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Qualitative Results</h2>
+
+        <!-- NTU-VIRAL -->
+        <h3 class="title is-4">NTU-VIRAL Dataset</h3>
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison on the <i>spms</i> sequence of the NTU-VIRAL dataset, which features
+            aggressive motion with rapid rotations and high accelerations.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video controls muted loop playsinline width="100%">
+            <source src="./static/videos/NTU_comparison.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <!-- Ours -->
+        <h3 class="title is-4" style="margin-top: 2rem;">Our Dataset</h3>
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison on the <i>CW</i> sequence of our dataset, collected in large-scale
+            rough terrain with wild fluctuations and degraded measurements due to dense vegetation and
+            extensive open spaces.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video controls muted loop playsinline width="100%">
+            <source src="./static/videos/boeun_comparison.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+    <!--/ Qualitative Results. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{shin2026icra,
+  author    = {Shin, Gunhee and Lee, Seungjae and Kong, Jei and Seo, Youngwoo and Myung, Hyun},
+  title     = {SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry},
+  booktitle = {Proc. of the IEEE Int. Conf. on Robotics and Automation (ICRA)},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

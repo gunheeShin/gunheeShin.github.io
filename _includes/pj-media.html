@@ -1,12 +1,13 @@
 {% comment %} One figure: image, gif, or mp4 (autoplay loop). Empty src -> grey placeholder showing the caption.
-   m.mine = [x, y, w, h] in percent draws a dashed box over the part I built; m.mine_label names it. {% endcomment %}
+   m.mine = [x, y, w, h] in percent draws a dashed box over the part I built; m.mine_label names it. m.controls: true -> play button instead of autoplay loop. {% endcomment %}
 {% assign m = include.m %}
 <figure class="pj-fig{% if include.cls %} {{ include.cls }}{% endif %}">
   <div class="pj-fig-box">
   {% if m.src and m.src != "" %}
     {% assign ext = m.src | split: "." | last | downcase %}
     {% if ext == "mp4" or ext == "webm" %}
-      <video src="{{ m.src | relative_url }}" autoplay muted loop playsinline></video>
+      {% if m.controls %}<video src="{{ m.src | relative_url }}" controls preload="metadata" playsinline></video>
+      {% else %}<video src="{{ m.src | relative_url }}" autoplay muted loop playsinline></video>{% endif %}
     {% else %}
       <img src="{{ m.src | relative_url }}" alt="{{ m.caption | strip_html | default: page.title }}" loading="lazy">
     {% endif %}

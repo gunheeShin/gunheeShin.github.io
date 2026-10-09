@@ -5,7 +5,7 @@
   venue: ICRA 2026
   links:
     - {name: arXiv, url: "https://arxiv.org/abs/2603.16118"}
-    - {name: project page, url: "https://se3-lio.github.io/"}
+    - {name: project page, url: "/se3-lio/"}
     - {name: code, url: "https://github.com/url-kaist/se3-lio"}
 - title: Online Target-less Radar-LiDAR-Camera Extrinsic Calibration via Joint Optimization
   authors: G. Shin, Y. Kim, C. Lee, W. Kim, M. Lee, S. Han, J. Woo, H. Chin, M. Park, and H. Myung
@@ -25,3 +25,10 @@
   venue: RiTA 2024
   links:
     - {name: arXiv, url: "https://arxiv.org/abs/2610.04551"}
+- title: "ORORA: Outlier-Robust Radar Odometry"
+  authors: H. Lim, K. Han, G. Shin, G. Kim, S. Hong, and H. Myung
+  my_name: G. Shin
+  venue: ICRA 2023
+  links:
+    - {name: arXiv, url: "https://arxiv.org/abs/2303.01876"}
+    - {name: code, url: "https://github.com/url-kaist/outlier-robust-radar-odometry"}

@@ -2,7 +2,7 @@
 layout: base
 ---
 <!-- Project detail page, same shape for both kinds (challenge, project), all from front matter:
-     hero (result, title, meta, confidential, links) -> teaser -> optional abstract, framework fig, results (table + fig) (research)
+     hero (result, title, meta, confidential, links) -> teaser -> optional abstract, framework fig (optional max width), results (table + fig or a sequence picker of videos) (research)
      1. Overview: overview.points, glance cards, overview.modules or overview.fig (mine box)
      2. My Part: items in mypart (title, text, result, fig), then optional table.
      3. Award (challenges): award = certificate and award photo, side by side. -->
@@ -28,7 +28,7 @@ layout: base
     <h2>Abstract</h2>
     {{ page.abstract | markdownify }}
   </section>{% endif %}
-  {% if page.framework %}<section class="pj-sec">{% include pj-media.html m=page.framework cls="pj-wide" %}</section>{% endif %}
+  {% if page.framework %}<section class="pj-sec"><div class="pj-narrow"{% if page.framework.max %} style="max-width:{{ page.framework.max }}px"{% endif %}>{% include pj-media.html m=page.framework cls="pj-wide" %}</div></section>{% endif %}
   {% if page.results %}{% assign r = page.results %}<section class="pj-sec">
     <h2>{{ r.title | default: "Results" }}</h2>
     {% if r.table %}<div class="pj-ltx-wrap">
@@ -39,6 +39,23 @@ layout: base
       <tbody>{% for row in r.table.rows %}<tr{% if row.rule %} class="pj-ltx-rule"{% endif %}>{% for c in row.cells %}<td>{{ c | markdownify | remove: '<p>' | remove: '</p>' }}</td>{% endfor %}</tr>{% endfor %}</tbody>
     </table></div>{% endif %}
     {% if r.fig %}{% include pj-media.html m=r.fig cls="pj-wide" %}{% endif %}
+    {% if r.videos %}{% assign vd = r.videos.items | where: "key", r.videos.default | first %}<figure class="pj-fig pj-wide pj-seq">
+      <div class="pj-seq-tabs">{% for v in r.videos.items %}<button type="button" class="pj-seq-tab{% if v.key == vd.key %} on{% endif %}" data-src="{{ v.src | relative_url }}" aria-pressed="{% if v.key == vd.key %}true{% else %}false{% endif %}">{{ v.label }}</button>{% endfor %}</div>
+      <div class="pj-fig-box"><video src="{{ vd.src | relative_url }}" autoplay muted loop playsinline></video></div>
+      {% if r.videos.caption %}<figcaption>{{ r.videos.caption | markdownify | remove: '<p>' | remove: '</p>' }}</figcaption>{% endif %}
+    </figure>
+    <script>
+      document.querySelectorAll(".pj-seq").forEach(function (f) {
+        var v = f.querySelector("video");
+        f.querySelectorAll(".pj-seq-tab").forEach(function (b) {
+          b.addEventListener("click", function () {
+            f.querySelectorAll(".pj-seq-tab").forEach(function (o) { o.classList.remove("on"); o.setAttribute("aria-pressed", "false"); });
+            b.classList.add("on"); b.setAttribute("aria-pressed", "true");
+            v.src = b.dataset.src; v.play();
+          });
+        });
+      });
+    </script>{% endif %}
   </section>{% endif %}
 
   {% if page.overview or page.glance %}

@@ -1,8 +1,6 @@
 # Home page news, newest first. Day is not shown (month and year only).
 - date: 2026-10-02
-  content: Our team won the **COMFORT Localization Challenge** at IROS 2026 with SE(3)-LIVOM. [Video](https://youtu.be/6d9qwjqTFwc) · [Code](https://github.com/url-kaist/se3-livom-comfort)
-- date: 2026-10-01
-  content: Two papers on arXiv, Radar-LiDAR-Camera calibration (ICCAS 2026) and NM-LIO.
+  content: Our team won the **COMFORT Localization Challenge** at IROS 2026 with SE(3)-LIVOM.
 - date: 2026-06-03
   content: Our team won the **Nothing Stands Still Challenge** at CVPR 2026.
 - date: 2026-01-01

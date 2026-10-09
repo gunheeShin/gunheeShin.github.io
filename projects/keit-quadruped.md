@@ -10,7 +10,7 @@ published: true
 
 teaser:
   src: /assets/img/projects/teasers/keit-quadruped.jpg
-  caption: "A Go1 with the two-LiDAR sensor unit at the orchard test site."
+  caption: "Our quadruped with its sensor unit at the orchard test site."
 
 overview:
   points:
@@ -23,6 +23,10 @@ overview:
     - {name: "Static map and terrain"}
     - {name: "Navigation and control"}
     - {name: "Mission and teleoperation"}
+  fig:
+    src: /assets/img/projects/keit-quadruped/orchard.mp4
+    controls: true
+    caption: "Phase-2 field test: two robots monitoring the orchard."
 
 glance:
   - {label: Platform, value: "Unitree Go1 and Go2"}
