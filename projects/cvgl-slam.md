@@ -30,7 +30,6 @@ results:
     default: "1311"
     caption: "TartanDrive 2.0 sequences on satellite imagery, 12x speed. Blue: CVGL-SLAM. Orange: SE(3)-LIO odometry. Dots: CVGL matches, colored by confidence."
     items:
-      - {key: "1253", label: "1253 · 4.4 km", src: /assets/img/projects/cvgl-slam/seq-1253.mp4}
       - {key: "1311", label: "1311 · 2.2 km", src: /assets/img/projects/cvgl-slam/seq-1311.mp4}
       - {key: "1342", label: "1342 · 1.7 km", src: /assets/img/projects/cvgl-slam/seq-1342.mp4}
       - {key: "1809", label: "1809 · 1.6 km", src: /assets/img/projects/cvgl-slam/seq-1809.mp4}
