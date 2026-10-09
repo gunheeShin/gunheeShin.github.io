@@ -1,8 +1,11 @@
 ---
 layout: base
 ---
-<!-- Project detail page, modeled on the academic project page (Nerfies) template:
-     centered title, meta, link buttons, a large big-picture figure, then narrow text sections. -->
+<!-- Project detail page, same shape for both kinds (challenge, project), all from front matter:
+     hero (result, title, meta, confidential, links) -> teaser -> optional abstract, framework fig, results (table + fig) (research)
+     1. Overview: overview.points, glance cards, overview.modules or overview.fig (mine box)
+     2. My Part: items in mypart (title, text, result, fig), then optional table.
+     3. Award (challenges): award = certificate and award photo, side by side. -->
 <main class="pj">
   <header class="pj-hero">
     {% if page.result and page.result != "" %}<div class="pj-result">{{ page.result }}</div>{% endif %}
@@ -12,23 +15,81 @@ layout: base
       {% if page.sponsor and page.sponsor != "" %}<span>{{ page.sponsor }}</span>{% endif %}
       {% if page.venue and page.venue != "" %}<span>{{ page.venue }}</span>{% endif %}
       {% if page.period and page.period != "" %}<span>{{ page.period }}</span>{% endif %}
-      {% if page.role and page.role != "" %}<span>Role: {{ page.role }}</span>{% endif %}
     </div>
-    {% if page.links %}<div class="pj-buttons">
+    {% if page.confidential %}<p class="pj-conf">{{ page.confidential }}</p>{% endif %}
+    {% if page.links and page.links.size > 0 %}<div class="pj-buttons">
       {% for l in page.links %}<a class="pj-btn" href="{{ l.url }}">{{ l.name }}</a>{% endfor %}
     </div>{% endif %}
   </header>
 
-  {% if page.bigpicture and page.bigpicture != "" %}
-  <figure class="pj-teaser">
-    <img src="{{ page.bigpicture | relative_url }}" alt="{{ page.title }}">
-    {% if page.bigpicture_caption and page.bigpicture_caption != "" %}<figcaption>{{ page.bigpicture_caption }}</figcaption>{% endif %}
-  </figure>
+  {% if page.teaser %}<div class="pj-teaser">{% include pj-media.html m=page.teaser %}</div>{% endif %}
+
+  {% if page.abstract %}<section class="pj-sec pj-text">
+    <h2>Abstract</h2>
+    {{ page.abstract | markdownify }}
+  </section>{% endif %}
+  {% if page.framework %}<section class="pj-sec">{% include pj-media.html m=page.framework cls="pj-wide" %}</section>{% endif %}
+  {% if page.results %}{% assign r = page.results %}<section class="pj-sec">
+    <h2>{{ r.title | default: "Results" }}</h2>
+    {% if r.table %}<div class="pj-ltx-wrap">
+      {% if r.table.caption %}<p class="pj-ltx-cap">{{ r.table.caption | markdownify | remove: '<p>' | remove: '</p>' }}</p>{% endif %}
+      <table class="pj-ltx">
+      <thead><tr>{% for c in r.table.cols %}<th>{{ c }}</th>{% endfor %}</tr>
+      {% if r.table.sub %}<tr class="pj-ltx-sub">{% for c in r.table.sub %}<th>{{ c }}</th>{% endfor %}</tr>{% endif %}</thead>
+      <tbody>{% for row in r.table.rows %}<tr{% if row.rule %} class="pj-ltx-rule"{% endif %}>{% for c in row.cells %}<td>{{ c | markdownify | remove: '<p>' | remove: '</p>' }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+    </table></div>{% endif %}
+    {% if r.fig %}{% include pj-media.html m=r.fig cls="pj-wide" %}{% endif %}
+  </section>{% endif %}
+
+  {% if page.overview or page.glance %}
+  <section class="pj-sec">
+    <h2>Overview</h2>
+    {% if page.overview.points %}<ul class="pj-points">{% for x in page.overview.points %}<li>{{ x | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}</ul>{% endif %}
+    {% if page.glance and page.glance.size > 0 %}<div class="pj-glance">
+      {% for g in page.glance %}<div class="pj-gl"><div class="pj-gl-label">{{ g.label }}</div><div class="pj-gl-value">{{ g.value | markdownify | remove: '<p>' | remove: '</p>' }}</div></div>{% endfor %}
+    </div>{% endif %}
+    {% if page.overview.modules %}<div class="pj-modules">{% for m in page.overview.modules %}<div class="pj-mod{% if m.mine %} pj-mod-mine{% endif %}">{{ m.name }}{% if m.note %}<span>{{ m.note }}</span>{% endif %}</div>{% endfor %}</div>
+    <p class="pj-modules-note">{{ page.overview.modules_note | default: "Highlighted: my part." }}</p>{% endif %}
+    {% if page.overview.fig %}{% include pj-media.html m=page.overview.fig cls="pj-wide" %}{% endif %}
+  </section>
   {% endif %}
 
-  <article class="pj-body">
-    {{ content }}
-  </article>
+  {% if page.mypart and page.mypart.size > 0 %}
+  <section class="pj-sec">
+    <h2>{{ page.mypart_title | default: "My Part" }}</h2>
+    {% for b in page.mypart %}
+    {% if b.fig %}<div class="pj-row{% cycle '', ' pj-row-flip' %}">
+      <div class="pj-row-fig">{% include pj-media.html m=b.fig %}</div>{% else %}<div class="pj-row pj-row-nofig">{% endif %}
+      <div class="pj-row-text">
+        <h3>{{ b.title }}</h3>
+        {{ b.text | markdownify }}
+        {% if b.result and b.result != "" %}<p class="pj-row-result">{{ b.result }}</p>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+    {% if page.table %}<div class="pj-table-wrap"><table class="pj-table">
+      <thead><tr>{% for c in page.table.cols %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+      <tbody>{% for r in page.table.rows %}<tr{% if r.mine %} class="pj-table-mine"{% endif %}>{% for c in r.cells %}<td>{{ c | markdownify | remove: '<p>' | remove: '</p>' }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+    </table>{% if page.table.note %}<p class="pj-table-note">{{ page.table.note }}</p>{% endif %}</div>{% endif %}
+  </section>
+  {% endif %}
 
-  <p class="pj-back"><a href="{{ '/projects' | relative_url }}">&larr; All projects</a></p>
+  {% if page.award and page.award.size > 0 %}
+  <section class="pj-sec">
+    <h2>Award</h2>
+    <div class="pj-award">{% for m in page.award %}{% include pj-media.html m=m %}{% endfor %}</div>
+  </section>
+  {% endif %}
+
+  {% assign body = content | strip %}
+  {% if body != "" %}<section class="pj-sec pj-text">{{ content }}</section>{% endif %}
+
+  {% case page.kind %}{% when "research" %}{% assign back = "/research" %}{% assign label = "research" %}{% when "challenge" %}{% assign back = "/challenges" %}{% assign label = "challenges" %}{% else %}{% assign back = "/projects" %}{% assign label = "projects" %}{% endcase %}
+  {% assign list = site.data.projects | where: "category", page.kind | where_exp: "x", "x.page and x.page != ''" %}
+  {% assign here = page.url | remove: ".html" %}
+  {% for x in list %}{% if x.page == here %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+  <nav class="pj-nav">
+    <a href="{{ back | relative_url }}">&larr; All {{ label }}</a>
+    {% if i %}{% assign j = i | plus: 1 %}{% assign nx = list[j] %}{% if nx %}<a class="pj-next" href="{{ nx.page | relative_url }}">{{ nx.title }} &rarr;</a>{% endif %}{% endif %}
+  </nav>
 </main>

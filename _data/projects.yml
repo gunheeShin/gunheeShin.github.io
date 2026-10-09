@@ -3,12 +3,18 @@
 # thumb: /assets/img/projects/<slug>.jpg (600x390, figure fitted on white; empty -> placeholder box)
 # page: detail page URL /projects/<slug> (empty -> no "details" button; set it when projects/<slug>.md is published)
 # links: list of {name, url}
-# featured: true -> shown as a large card in "Featured" and left out of its section rows
+
+- category: research
+  title: "CVGL-SLAM: Satellite Imagery as an Absolute Constraint for Drift-Bounded SLAM"
+  venue: In preparation
+  thumb: /assets/img/projects/cvgl-slam.jpg
+  page: "/projects/cvgl-slam"
+  summary: Bounds odometry drift without loop closure by matching the robot's view to satellite imagery and adding confident matches to a pose graph.
+  links: []
 
 - category: research
   title: "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold"
   venue: ICRA 2026
-  role: First author
   thumb: /assets/img/projects/se3-lio.gif
   page: ""
   summary: LiDAR-inertial odometry that propagates the IMU state jointly on SE(3), staying accurate under fast motion and vibration.
@@ -23,30 +29,31 @@
 - category: research
   title: Online Target-less Radar-LiDAR-Camera Extrinsic Calibration via Joint Optimization
   venue: ICCAS 2026
-  role: First author
   thumb: /assets/img/projects/rlc-calib.jpg
   page: ""
   summary: Online calibration of radar, LiDAR, and camera without targets, optimizing all three sensor pairs together.
-  links: []
+  links:
+    - name: arXiv
+      url: https://arxiv.org/abs/2610.04552
 
 - category: research
   title: "NM-LIO: Multiple LiDAR-Inertial Odometry Addressing LiDAR Measurement Noise Discrepancy"
   venue: RiTA 2024
-  role: First author
   thumb: /assets/img/projects/nm-lio.jpg
   page: ""
   summary: Multi-LiDAR inertial odometry that models the measurement noise of each LiDAR.
-  links: []
+  links:
+    - name: arXiv
+      url: https://arxiv.org/abs/2610.04551
 
 - category: challenge
   title: COMFORT Localization Challenge
-  featured: true
   venue: IROS 2026
   result: Winner
   role: Lead, full localization system
   thumb: /assets/img/projects/comfort-2026.jpg
-  page: ""
-  summary: Estimate the trajectory of an ANYmal legged robot in six field scenes of the GrandTour dataset.
+  page: "/projects/comfort-2026"
+  summary: Estimate the full trajectory of an ANYmal quadruped walking through six field scenes of ETH's GrandTour dataset, scored by absolute trajectory error.
   links:
     - name: code
       url: https://github.com/url-kaist/se3-livom-comfort
@@ -57,8 +64,8 @@
   result: Winner
   role: Point cloud registration
   thumb: /assets/img/projects/nss-2026.jpg
-  page: ""
-  summary: Align scans of a building site taken at different construction stages into one map.
+  page: "/projects/nss-2026"
+  summary: Align indoor scans of a building taken at different construction stages into one frame, with no scan-pair information and outlier scans mixed in.
   links: []
 
 - category: challenge
@@ -67,7 +74,7 @@
   result: 2nd Place
   role: State estimation
   thumb: /assets/img/projects/qrc-2025.jpg
-  page: ""
+  page: "/projects/qrc-2025"
   summary: Legged robots cross rough-terrain lanes and complete inspection and manipulation tasks.
   links: []
 
@@ -77,8 +84,8 @@
   result: 2nd Place
   role: Localization
   thumb: /assets/img/projects/qrc-2024.jpg
-  page: ""
-  summary: Legged robots run as many laps of a course as they can in 10 minutes, fully autonomously.
+  page: "/projects/qrc-2024"
+  summary: Legged robots lap a course as many times as they can in 10 minutes, using only onboard sensors and computing.
   links: []
 
 - category: challenge
@@ -87,8 +94,8 @@
   result: Winner
   role: LiDAR SLAM
   thumb: /assets/img/projects/hilti-2023.jpg
-  page: ""
-  summary: Estimate accurate trajectories from data recorded on construction sites, in narrow rooms, and in the dark.
+  page: "/projects/hilti-2023"
+  summary: Estimate accurate trajectories from data recorded on construction sites, in narrow rooms, and in the dark. 63 teams took part.
   links: []
 
 - category: project
@@ -97,40 +104,38 @@
   period: 2026 – Present
   role: GNSS-free visual navigation
   thumb: /assets/img/projects/hanwha-drone.jpg
-  page: ""
-  summary: Fused visual-inertial odometry with satellite-image localization.
+  page: "/projects/hanwha-drone"
+  summary: Real-time drone navigation in a 5 km × 5 km area with jammed GNSS, by matching downward camera images to satellite maps and fusing the result with visual-inertial odometry.
   links: []
 
 - category: project
-  title: Online Target-less Radar-LiDAR-Camera Calibration
+  title: Online Radar-LiDAR-Camera Calibration for Autonomous Vehicles
   sponsor: LG Innotek
   period: 2025 – Present
   role: Lead, multi-sensor calibration
   thumb: /assets/img/projects/lg-innotek-calib.jpg
-  page: ""
-  summary: Led development of online calibration between radar, LiDAR, and camera without targets.
+  page: "/projects/lg-innotek-calib"
+  summary: Calibrate radar, LiDAR, and camera while the vehicle drives, without targets, then use the calibrated sensors for simultaneous calibration, localization, and mapping.
   links: []
 
 - category: project
-  title: Off-Road Autonomous Driving in Unstructured Environments (Autonomy Hub)
-  featured: true
+  title: Off-Road Autonomous Driving in Unstructured Terrain
   sponsor: Hanwha Aerospace
   period: 2023 – 2026
   role: GNSS-free localization for long-range driving
   thumb: /assets/img/projects/hanwha-offroad.jpg
-  page: ""
-  summary: Built LiDAR-inertial odometry (SE(3)-LIO) and fused it with satellite-image localization for driving without GNSS.
+  page: "/projects/hanwha-offroad"
+  summary: An unmanned ground vehicle drives to a goal through unmapped off-road terrain under GPS jamming. Joint project of Hanwha Aerospace and three KAIST labs (Autonomy Hub).
   links: []
 
 - category: project
-  title: Mobility Intelligence Software for Quadruped Robots
-  featured: true
+  title: Mobility Intelligence Software for Legged Robots
   sponsor: KEIT
   period: 2022 – 2026
   role: Localization and sensor system
   thumb: /assets/img/projects/keit-quadruped.jpg
-  page: ""
-  summary: Set up the multi-LiDAR sensor system and built odometry and localization in prebuilt maps.
+  page: "/projects/keit-quadruped"
+  summary: Perception, mobility, and mission software for quadruped robots at real field sites (a disaster site, a substation, an orchard), extended to multi-robot teams in phase 2.
   links: []
 
 - category: project
@@ -139,6 +144,6 @@
   period: 2023
   role: Semantic SLAM on real sensor data
   thumb: /assets/img/projects/lg-semantic-slam.jpg
-  page: ""
-  summary: Ran 3D scene graph SLAM (Hydra) on real sensor data and added object-level loop closing.
+  page: "/projects/lg-semantic-slam"
+  summary: Build 3D scene graphs from real sensor data so a robot can follow commands like "go to the fridge" instead of coordinates.
   links: []

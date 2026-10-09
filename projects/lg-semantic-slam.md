@@ -1,23 +1,36 @@
 ---
+# Private sponsor, no paper: text and an outline diagram only.
+kind: project
 title: "Semantic SLAM for Spatial AI"
-subtitle: ""
-published: false    # skeleton; when filled, set published: true and page: /projects/lg-semantic-slam in _data/projects.yml
 sponsor: LG Electronics
 period: 2023
-role: ""
-bigpicture: ""          # big-picture system figure shown under the title
-bigpicture_caption: ""
-links: []               # buttons under the title, e.g. [{name: Code, url: ...}]
+confidential: "Confidential project. Internal figures and numbers are not shown."
+links: []
+published: true
+
+teaser:
+  src: /assets/img/projects/teasers/lg-semantic-slam.jpg
+  caption: "Hydra on real data: the metric-semantic mesh of a building floor and its 3D scene graph."
+
+overview:
+  points:
+    - "Run a 3D scene graph SLAM (Hydra, MIT) on real sensors instead of simulation."
+    - "Goal: a robot told \"go to the fridge\" instead of given coordinates."
+    - "**Delivered** a semantic SLAM survey and a real-building evaluation with three improvement directions."
+  modules:
+    - {name: "Sensor inputs", note: "depth, semantics, odometry", mine: true}
+    - {name: "Mesh and places"}
+    - {name: "Objects and rooms"}
+    - {name: "Loop closing", mine: true}
+
+glance:
+  - {label: Platform, value: "Handheld rig"}
+  - {label: Sensors, value: "Depth camera, RGB camera, IMU"}
+  - {label: Environment, value: "Two floors of a KAIST building"}
+
+mypart:
+  - title: "Real-sensor inputs"
+    text: "Depth, semantics (HRNet trained on ADE20K, mapped to 20 classes), and odometry wired into Hydra."
+  - title: "Loop closing with Quatro"
+    text: "Replaced TEASER++ with our gravity-aligned Quatro; revisited floors stopped drifting apart in height."
 ---
-
-## The Big Picture
-<!-- What the whole project or challenge set out to solve: goal in 1-2 sentences, team and scale, one system figure. -->
-
-## Where I Fit
-<!-- The same system figure with only my blocks highlighted, plus a one-line role. -->
-
-## What I Built
-<!-- One short block per part I owned: what it is, why it was needed, one figure. -->
-
-## Outcome
-<!-- Team result and the result of my part, stated separately. -->

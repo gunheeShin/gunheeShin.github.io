@@ -20,8 +20,9 @@ author: Gunhee Shin
 ###############################################
 
 navbar-links:
-  About Me: "aboutme"
+  Research: "research"
   Projects: "projects"
+  Challenges: "challenges"
   CV: "cv/cv.pdf"
 
 ################

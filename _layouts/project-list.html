@@ -1,0 +1,14 @@
+---
+layout: base
+---
+<!-- One list page per category (research.html, projects.html, challenges.html): rows from _data/projects.yml where category == page.category. -->
+<main class="pl">
+  <header class="pl-head">
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.intro }} Papers are listed on the <a href="{{ '/' | relative_url }}">home page</a> and in the <a href="{{ '/cv/cv.pdf' | relative_url }}">CV</a>.</p>
+  </header>
+  {% assign items = site.data.projects | where: "category", page.category %}
+  <div class="proj-list">
+    {% for p in items %}{% include project-row.html p=p %}{% endfor %}
+  </div>
+</main>

@@ -1,34 +1,8 @@
 ---
-layout: base
-title: Projects
+layout: project-list
 css: /assets/css/projects.css
 ext-css: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+title: Projects
+category: project
+intro: Funded projects in localization for field robots.
 ---
-<main class="pl">
-  <header class="pl-head">
-    <h1>Projects</h1>
-    <p>Research, challenges, and funded projects in localization for field robots.</p>
-  </header>
-
-  {% assign featured = site.data.projects | where: "featured", true %}
-  {% if featured.size > 0 %}
-  <section class="pl-section">
-    <h2 class="pl-label">Featured</h2>
-    {% for p in featured %}{% include project-featured.html p=p flip=forloop.index0 %}{% endfor %}
-  </section>
-  {% endif %}
-
-  {% assign sections = "research:Research|challenge:Challenges|project:Funded Projects" | split: "|" %}
-  {% for s in sections %}
-    {% assign kv = s | split: ":" %}
-    {% assign items = site.data.projects | where: "category", kv[0] | where_exp: "x", "x.featured != true" %}
-    {% if items.size > 0 %}
-    <section class="pl-section">
-      <h2 class="pl-label">{{ kv[1] }}</h2>
-      <div class="proj-list">
-        {% for p in items %}{% include project-row.html p=p %}{% endfor %}
-      </div>
-    </section>
-    {% endif %}
-  {% endfor %}
-</main>

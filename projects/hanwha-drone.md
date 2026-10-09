@@ -1,23 +1,37 @@
 ---
+# Private sponsor, no paper yet: text and an outline diagram only.
+kind: project
 title: "GNSS-Free Visual-Inertial Navigation for Drones"
-subtitle: ""
-published: false    # skeleton; when filled, set published: true and page: /projects/hanwha-drone in _data/projects.yml
 sponsor: Hanwha Aerospace
-period: 2026 – Present
-role: ""
-bigpicture: ""          # big-picture system figure shown under the title
-bigpicture_caption: ""
-links: []               # buttons under the title, e.g. [{name: Code, url: ...}]
+period: 2026 – 2028
+confidential: "Confidential project. Internal figures and numbers are not shown."
+links: []
+published: true
+
+teaser:
+  src: /assets/img/projects/teasers/hanwha-drone.jpg
+  caption: "Flight paths of the public high-altitude sequences used for development. Imagery: Google Earth."
+
+overview:
+  points:
+    - "Real-time drone navigation where GNSS is jammed."
+    - "Absolute fixes from matching the downward camera to satellite imagery, fused with visual-inertial odometry."
+    - "**First year:** methods on public data; then the sponsor's drone."
+  modules:
+    - {name: "Downward camera + IMU"}
+    - {name: "VIO", mine: true}
+    - {name: "Satellite-map matching"}
+    - {name: "Fusion", note: "VIO + absolute fixes", mine: true}
+    - {name: "Navigation output"}
+
+glance:
+  - {label: Platform, value: "Drone with an embedded GPU computer"}
+  - {label: Sensors, value: "Downward camera, IMU"}
+  - {label: Environment, value: "High altitude, GNSS jammed"}
+
+mypart:
+  - title: "Which VIO survives high altitude"
+    text: "At several hundred meters many VIO systems lose scale. I picked the one that kept scale on every public sequence."
+  - title: "Pose-graph fusion"
+    text: "Each absolute fix becomes a factor on the VIO trajectory; the fused error is a small fraction of VIO alone."
 ---
-
-## The Big Picture
-<!-- What the whole project or challenge set out to solve: goal in 1-2 sentences, team and scale, one system figure. -->
-
-## Where I Fit
-<!-- The same system figure with only my blocks highlighted, plus a one-line role. -->
-
-## What I Built
-<!-- One short block per part I owned: what it is, why it was needed, one figure. -->
-
-## Outcome
-<!-- Team result and the result of my part, stated separately. -->

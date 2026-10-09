@@ -1,9 +1,27 @@
-- title: 'SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3)
-    Manifold for Accurate and Robust LiDAR-Inertial Odometry'
-  authors: G. Shin, S. Lee, J. Kong, Y. Seo, H. Myung
+# Selected publications on the home page (full list in cv/cv.html). Venue strings match the CV.
+- title: "SE(3)-LIO: Smooth IMU Propagation With Jointly Distributed Poses on SE(3) Manifold for Accurate and Robust LiDAR-Inertial Odometry"
+  authors: G. Shin, S. Lee, J. Kong, Y.-W. Seo, and H. Myung
   my_name: G. Shin
-  venue: IEEE International Conference on Robotics and Automation (ICRA)
-  year: 2026
-  status: accepted
-  arxiv: '2603.16118'
-  project_page: https://se3-lio.github.io/
+  venue: ICRA 2026
+  links:
+    - {name: arXiv, url: "https://arxiv.org/abs/2603.16118"}
+    - {name: project page, url: "https://se3-lio.github.io/"}
+    - {name: code, url: "https://github.com/url-kaist/se3-lio"}
+- title: Online Target-less Radar-LiDAR-Camera Extrinsic Calibration via Joint Optimization
+  authors: G. Shin, Y. Kim, C. Lee, W. Kim, M. Lee, S. Han, J. Woo, H. Chin, M. Park, and H. Myung
+  my_name: G. Shin
+  venue: ICCAS 2026
+  links:
+    - {name: arXiv, url: "https://arxiv.org/abs/2610.04552"}
+- title: "KISS-Matcher: Fast and Robust Point Cloud Registration Revisited"
+  authors: H. Lim, D. Kim, G. Shin, J. Shi, I. Vizzo, H. Myung, J. Park, and L. Carlone
+  my_name: G. Shin
+  venue: ICRA 2025
+  links:
+    - {name: arXiv, url: "https://arxiv.org/abs/2409.15615"}
+- title: "NM-LIO: Multiple LiDAR-Inertial Odometry Addressing LiDAR Measurement Noise Discrepancy"
+  authors: G. Shin, S. Lee, M. Oh, D. Lee, J. Lee, Y. Seo, and H. Myung
+  my_name: G. Shin
+  venue: RiTA 2024
+  links:
+    - {name: arXiv, url: "https://arxiv.org/abs/2610.04551"}

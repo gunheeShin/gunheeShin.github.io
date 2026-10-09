@@ -1,0 +1,19 @@
+{% comment %} One figure: image, gif, or mp4 (autoplay loop). Empty src -> grey placeholder showing the caption.
+   m.mine = [x, y, w, h] in percent draws a dashed box over the part I built; m.mine_label names it. {% endcomment %}
+{% assign m = include.m %}
+<figure class="pj-fig{% if include.cls %} {{ include.cls }}{% endif %}">
+  <div class="pj-fig-box">
+  {% if m.src and m.src != "" %}
+    {% assign ext = m.src | split: "." | last | downcase %}
+    {% if ext == "mp4" or ext == "webm" %}
+      <video src="{{ m.src | relative_url }}" autoplay muted loop playsinline></video>
+    {% else %}
+      <img src="{{ m.src | relative_url }}" alt="{{ m.caption | strip_html | default: page.title }}" loading="lazy">
+    {% endif %}
+  {% else %}
+    <div class="pj-ph{% if m.ratio %} pj-ph-{{ m.ratio }}{% endif %}"><span>{{ m.placeholder | default: "figure" }}</span></div>
+  {% endif %}
+  {% if m.mine %}<div class="pj-mine" style="left:{{ m.mine[0] }}%;top:{{ m.mine[1] }}%;width:{{ m.mine[2] }}%;height:{{ m.mine[3] }}%"><span>{{ m.mine_label | default: "My part" }}</span></div>{% endif %}
+  </div>
+  {% if m.caption and m.caption != "" %}<figcaption>{{ m.caption | markdownify | remove: '<p>' | remove: '</p>' }}</figcaption>{% endif %}
+</figure>

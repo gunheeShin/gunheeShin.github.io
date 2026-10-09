@@ -1,0 +1,33 @@
+/* Home: header, intro, news, selected publications. One column, left aligned. */
+.hm { max-width: 860px; margin: 0 auto; padding: 7rem 1.25rem 4rem; font-family: "Inter", "Noto Sans", system-ui, sans-serif; color: #1f2328; font-size: 1.02rem; line-height: 1.6; }
+.hm h1, .hm h2 { font-family: inherit; }
+.hm-cover { position: relative; aspect-ratio: 2.45 / 1; border-radius: 12px; background-size: cover; background-position: center 52%; }
+.hm-credit { position: absolute; right: .8rem; bottom: .5rem; font-size: .7rem; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); font-family: "Inter", system-ui, sans-serif; }
+.hm-head { position: relative; z-index: 2; padding-left: 1.6rem; display: flex; align-items: flex-end; gap: 1.4rem; margin: -72px 0 1.6rem; }
+.hm-avatar { width: 144px; height: 144px; border-radius: 50%; object-fit: cover; border: 5px solid #fff; box-shadow: 0 6px 18px -8px rgba(15, 23, 42, .45); flex: 0 0 auto; background: #fff; }
+.hm-name { padding-bottom: .5rem; }
+.hm-head h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -.02em; margin: 0; line-height: 1.15; }
+.hm-sub { color: #656d76; font-size: 1.1rem; margin: .2rem 0 0; }
+.hm-intro { margin-top: 0; }
+.hm-intro p { margin: 0 0 .8rem; }
+.hm h2 { font-size: 1.25rem; font-weight: 700; margin: 0 0 .9rem; padding-bottom: .4rem; border-bottom: 1px solid #e6e8eb; }
+.hm a { color: #0b6bcb; }
+.hm-section { margin-top: 2.6rem; }
+.hm-contact a { margin-right: 1.1rem; font-weight: 500; }
+.hm-news, .hm-pubs { list-style: none; padding: 0; margin: 0; }
+.hm-news li { display: flex; gap: 1rem; margin-bottom: .45rem; }
+.hm-date { flex: 0 0 5.2rem; color: #656d76; font-variant-numeric: tabular-nums; }
+.hm-pubs li { margin-bottom: 1.1rem; }
+.hm-ptitle { font-weight: 600; }
+.hm-pauth, .hm-pvenue { font-size: .94rem; color: #3d444d; }
+.hm-more { font-size: .94rem; color: #656d76; margin-top: .6rem; }
+@media (max-width: 768px) {
+  .hm { padding-top: 5rem; }
+  .hm-cover { aspect-ratio: 3 / 2; border-radius: 10px; }
+  .hm-head { flex-direction: column; align-items: flex-start; gap: .6rem; margin-top: -52px; padding-left: 1rem; }
+  .hm-avatar { width: 104px; height: 104px; border-width: 4px; }
+  .hm-name { padding-bottom: 0; }
+  .hm-head h1 { font-size: 1.9rem; }
+  .hm-news li { display: block; margin-bottom: .8rem; }
+  .hm-date { display: block; font-size: .88rem; }
+}
