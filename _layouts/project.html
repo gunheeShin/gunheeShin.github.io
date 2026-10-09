@@ -102,7 +102,7 @@ layout: base
   {% if body != "" %}<section class="pj-sec pj-text">{{ content }}</section>{% endif %}
 
   {% case page.kind %}{% when "research" %}{% assign back = "/research" %}{% assign label = "research" %}{% when "challenge" %}{% assign back = "/challenges" %}{% assign label = "challenges" %}{% else %}{% assign back = "/projects" %}{% assign label = "projects" %}{% endcase %}
-  {% assign list = site.data.projects | where: "category", page.kind | where_exp: "x", "x.page and x.page != ''" %}
+  {% assign list = site.data.projects | where: "category", page.kind | where_exp: "x", "x.page" | where_exp: "x", "x.page != ''" %}
   {% assign here = page.url | remove: ".html" %}
   {% for x in list %}{% if x.page == here %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
   <nav class="pj-nav">
